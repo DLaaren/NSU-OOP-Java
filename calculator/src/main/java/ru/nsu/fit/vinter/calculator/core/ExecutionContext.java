@@ -6,9 +6,9 @@ import java.util.Stack;
 
 public class ExecutionContext {
     private Map<String, Double> mapWithVariables = new HashMap<>();
-    private Stack<Double> stackWithOperands = new Stack<>();
+    private Stack<Operand> stackWithOperands = new Stack<>();
 
-    public Stack<Double> getStackWithOperands() {
+    public Stack<Operand> getStackWithOperands() {
         return stackWithOperands;
     }
 
