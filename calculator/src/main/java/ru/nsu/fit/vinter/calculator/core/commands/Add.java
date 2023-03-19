@@ -13,8 +13,7 @@ public class Add implements Command {
         Stack<Operand> stack = context.getStackWithOperands();
         var v1 = stack.pop().getValueOfOperand();
         var v2 = stack.pop().getValueOfOperand();
-        var resAdd = v1 + v2;
-        Operand result = new Number(resAdd);
+        Operand result = new Number(v1 + v2);
         stack.push(result);
     }
 }

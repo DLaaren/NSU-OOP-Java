@@ -2,20 +2,22 @@ package ru.nsu.fit.vinter.calculator.core.commands;
 
 import ru.nsu.fit.vinter.calculator.core.Command;
 import ru.nsu.fit.vinter.calculator.core.ExecutionContext;
+import ru.nsu.fit.vinter.calculator.core.Number;
+import ru.nsu.fit.vinter.calculator.core.Operand;
+import ru.nsu.fit.vinter.calculator.core.Variable;
 
-import java.util.Map;
 import java.util.Stack;
 
 public class Push implements Command {
     @Override
-    public void apply(ExecutionContext context, String args[]) {
-        Stack<Double> stack = context.getStackWithOperands();
-        if (Character.isAlphabetic(args[0].charAt(0))) {
-            Map<String, Double> map = context.getMapWithVariables();
-            var v1 = map. get(args[0]);
+    public void apply(ExecutionContext context, String[] args) {
+        Stack<Operand> stack = context.getStackWithOperands();
+        if (Character.isAlphabetic(args[1].charAt(0))) {
+            Operand v1 = new Variable(args[1], context);
             stack.push(v1);
         } else {
-            stack.push(Double.valueOf(args[0]));
+            Operand v2 = new Number(Double.valueOf(args[1]));
+            stack.push(v2);
         }
     }
 }
