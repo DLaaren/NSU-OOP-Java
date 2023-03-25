@@ -3,8 +3,8 @@ package ru.nsu.fit.vinter.calculator.core;
 import java.util.Map;
 
 public class Variable implements Operand {
-    private String variable;
-    private ExecutionContext context;
+    private final String variable;
+    private final ExecutionContext context;
 
     public Variable(String variable, ExecutionContext context) {
         this.variable = variable;

@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Stack;
 
 public class ExecutionContext {
-    private Map<String, Double> mapWithVariables = new HashMap<>();
-    private Stack<Operand> stackWithOperands = new Stack<>();
+    private final Map<String, Double> mapWithVariables = new HashMap<>();
+    private final Stack<Operand> stackWithOperands = new Stack<>();
 
     public Stack<Operand> getStackWithOperands() {
         return stackWithOperands;

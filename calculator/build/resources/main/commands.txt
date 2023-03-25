@@ -1,0 +1,9 @@
++ ru.nsu.fit.vinter.calculator.core.commands.Add
+- ru.nsu.fit.vinter.calculator.core.commands.Sub
+* ru.nsu.fit.vinter.calculator.core.commands.Mul
+/ ru.nsu.fit.vinter.calculator.core.commands.Div
+SQRT ru.nsu.fit.vinter.calculator.core.commands.Sqrt
+DEFINE ru.nsu.fit.vinter.calculator.core.commands.Define
+PUSH ru.nsu.fit.vinter.calculator.core.commands.Push
+POP ru.nsu.fit.vinter.calculator.core.commands.Pop
+PRINT ru.nsu.fit.vinter.calculator.core.commands.Print

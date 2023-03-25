@@ -1,9 +1,13 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
-group 'ru.nsu.fit.vinter.calculator'
-version '1.0-SNAPSHOT'
+mainClassName = 'ru.nsu.fit.vinter.calculator.executable.Main'
+
+run {
+    standardInput = System.in
+}
 
 repositories {
     mavenCentral()
