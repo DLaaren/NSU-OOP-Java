@@ -1,15 +1,18 @@
 package ru.nsu.fit.vinter.calculator.core;
 
+import ru.nsu.fit.vinter.calculator.core.exceptions.CalcException;
+import ru.nsu.fit.vinter.calculator.core.exceptions.CanNotCreateClassCommandException;
+import ru.nsu.fit.vinter.calculator.core.exceptions.NoSuchCommandException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 public class Calculator {
     private final CommandFactory factory = new CommandFactory();
     private final ExecutionContext calcContext = new ExecutionContext();
-    private BufferedReader reader;
+    private final BufferedReader reader;
 
-    public Calculator(BufferedReader reader) throws IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public Calculator(BufferedReader reader) throws IOException {
         this.reader = reader;
     }
 
@@ -21,8 +24,15 @@ public class Calculator {
 
     public void processInput() throws IOException {
         String line = reader.readLine();
-        while (line != "stop this shit") {
-            processCommand(line);
+        while (!line.equals("stop")) {
+            try {
+                processCommand(line);
+            } catch(CanNotCreateClassCommandException e) {
+                System.err.println(e.getMessage());
+                System.exit(1);
+            } catch(CalcException e) {
+                System.err.println(e.getMessage());
+            }
             line = reader.readLine();
         }
     }

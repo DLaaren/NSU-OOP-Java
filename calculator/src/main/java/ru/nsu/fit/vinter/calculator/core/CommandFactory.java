@@ -1,5 +1,7 @@
 package ru.nsu.fit.vinter.calculator.core;
 
+import ru.nsu.fit.vinter.calculator.core.exceptions.CanNotCreateClassCommandException;
+import ru.nsu.fit.vinter.calculator.core.exceptions.NoSuchCommandException;
 import ru.nsu.fit.vinter.calculator.core.exceptions.ResourceNotFoundException;
 
 import java.io.BufferedReader;
@@ -14,7 +16,7 @@ import java.util.Objects;
 public class CommandFactory {
     private final Map<String, Command> commands = new HashMap<>();
 
-    public CommandFactory() throws IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ResourceNotFoundException {
+    public CommandFactory() throws IOException, ResourceNotFoundException {
         InputStream inputStream = CommandFactory.class.getResourceAsStream("/commands.txt");
 
         if (Objects.isNull(inputStream)) {
@@ -30,12 +32,25 @@ public class CommandFactory {
         }
     }
 
-    private static Command createCommand(String className) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-        Class<?> commandClass = Class.forName(className);
-        return (Command) commandClass.getDeclaredConstructor().newInstance();
+    private static Command createCommand(String className) {
+        Class<?> commandClass;
+        try {
+            commandClass = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            throw new CanNotCreateClassCommandException("Check the file with commands");
+        }
+        try {
+            return (Command) commandClass.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
+            throw new CanNotCreateClassCommandException("Check constructors of commands");
+        }
     }
 
     public Command getCommand(String className) {
+        if (commands.get(className) == null) {
+            throw new NoSuchCommandException("There is no such command");
+        }
         return commands.get(className);
     }
 

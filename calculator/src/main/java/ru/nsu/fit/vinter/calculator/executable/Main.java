@@ -14,11 +14,9 @@ public class Main {
         if (args.length == 0) { //from terminal
             inputStream = System.in;
             reader = new BufferedReader(new InputStreamReader(inputStream));
-        } else if (args.length == 1) { //from file
+        } else{ //from file
             inputStream = new FileInputStream(args[0]);
             reader = new BufferedReader(new InputStreamReader(inputStream));
-        } else {
-            throw new TooMuchArgsForInputException("Input contains too much arguments");
         }
 
         Calculator calculator = new Calculator(reader);
