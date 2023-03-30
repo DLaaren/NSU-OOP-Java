@@ -2,7 +2,7 @@ package ru.nsu.fit.vinter.calculator.core;
 
 import ru.nsu.fit.vinter.calculator.core.exceptions.CalcException;
 import ru.nsu.fit.vinter.calculator.core.exceptions.CanNotCreateClassCommandException;
-import ru.nsu.fit.vinter.calculator.core.exceptions.NoSuchCommandException;
+import ru.nsu.fit.vinter.calculator.core.exceptions.EmptyStackException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,6 +35,13 @@ public class Calculator {
             }
             line = reader.readLine();
         }
+    }
+
+    public double getLastResult() {
+        if (calcContext.isStackEmpty()) {
+            throw new EmptyStackException("Can not get result, because context is empty");
+        }
+        return calcContext.getLastResult();
     }
 
 }

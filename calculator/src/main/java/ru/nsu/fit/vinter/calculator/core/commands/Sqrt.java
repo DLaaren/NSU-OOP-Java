@@ -12,12 +12,12 @@ import java.util.Stack;
 public class Sqrt implements Command {
     @Override
     public void apply(ExecutionContext context, String[] args) {
-        if (args.length > 1) {
+        if (args.length >= 2) {
             throw new TooMuchOperandsException("This operation takes operands from the stack, not from the input");
         }
         Stack<Operand> stack = context.getStackWithOperands();
-        if (stack.size() < 2) {
-            throw new NotEnoughOperandsOnStackException("There are less than two operands on the stack for sqrt");
+        if (stack.isEmpty()) {
+            throw new NotEnoughOperandsOnStackException("There is no operand on the stack for sqrt");
         }
         var v1 = stack.pop().getValueOfOperand();
         v1 = Math.sqrt(v1);

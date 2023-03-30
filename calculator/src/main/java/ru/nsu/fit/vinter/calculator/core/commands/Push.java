@@ -13,10 +13,10 @@ import java.util.Stack;
 public class Push implements Command {
     @Override
     public void apply(ExecutionContext context, String[] args) {
-        if (args.length < 2) {
+        if (args.length <= 1) {
             throw new NotEnoughOperandsOnStackException("There is no operand in the input for pushing");
         }
-        if (args.length > 2) {
+        if (args.length >= 3) {
             throw new TooMuchOperandsException("Excess operands in the input");
         }
         Stack<Operand> stack = context.getStackWithOperands();

@@ -11,7 +11,7 @@ import java.util.Stack;
 public class Pop implements Command {
     @Override
     public void apply(ExecutionContext context, String[] args) {
-        if (args.length > 1) {
+        if (args.length >= 2) {
             throw new TooMuchOperandsException("This operation takes operands from the stack, not from the input");
         }
         Stack<Operand> stack = context.getStackWithOperands();

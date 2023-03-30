@@ -15,4 +15,11 @@ public class ExecutionContext {
     public Map<String, Double> getMapWithVariables() {
         return mapWithVariables;
     }
+
+    public double getLastResult() {
+        return stackWithOperands.peek().getValueOfOperand();
+    }
+    public boolean isStackEmpty() {
+        return stackWithOperands.isEmpty();
+    }
 }

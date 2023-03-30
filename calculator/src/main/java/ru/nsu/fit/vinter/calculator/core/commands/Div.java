@@ -12,11 +12,11 @@ import java.util.Stack;
 public class Div implements Command {
     @Override
     public void apply(ExecutionContext context, String[] args) {
-        if (args.length > 1) {
+        if (args.length >= 2) {
             throw new TooMuchOperandsException("This operation takes operands from the stack, not from the input");
         }
         Stack<Operand> stack = context.getStackWithOperands();
-        if (stack.size() < 3) {
+        if (stack.size() <= 1) {
             throw new NotEnoughOperandsOnStackException("There are less than two operands on the stack for division");
         }
         var v1 = stack.pop().getValueOfOperand();

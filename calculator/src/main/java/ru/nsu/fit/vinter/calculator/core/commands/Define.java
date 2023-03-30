@@ -10,10 +10,10 @@ import java.util.Map;
 public class Define implements Command {
     @Override
     public void apply(ExecutionContext context, String[] args) {
-        if (args.length < 3) {
+        if (args.length <= 2) {
             throw new NotEnoughOperandsOnStackException("There are less than two operands in the input for definition");
         }
-        if (args.length > 3) {
+        if (args.length >= 4) {
             throw new TooMuchOperandsException("Excess operands in the input");
         }
         Map<String, Double> map = context.getMapWithVariables();
