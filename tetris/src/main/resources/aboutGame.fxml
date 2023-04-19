@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.vinter.tetris.core.presenter.Presenter">
+      <TextArea layoutX="50.0" layoutY="170.0" prefHeight="450.0" prefWidth="500.0" text="   Tetris (Russian: Тетрис) is a puzzle video game&#10;          created by the Soviet software engineer&#10;&#9;&#9;        Alexey Pajitnov in 1984.&#10;       In Tetris, players complete lines by moving&#10;          differently shaped pieces (tetrominoes),&#10;            which descend onto the playing field.&#10;        The completed lines disappear and grant&#10;            the player points, and the player can&#10;               proceed to fill the vacated spaces.&#10;        The game ends when the uncleared lines&#10;      reach the top of the playing field. The longer&#10;             the player can delay this outcome,&#10;    &#9;&#9;   the higher their score will be.">
+         <font>
+            <Font size="20.0" />
+         </font></TextArea>
+      <Button fx:id="exitButton1" layoutX="230.0" layoutY="661.0" mnemonicParsing="false" onMouseClicked="#getBackButtonCLicked" prefHeight="40.0" prefWidth="140.0" text="Get Back" />
+      <TextArea editable="false" layoutX="200.0" layoutY="68.0" prefHeight="28.0" prefWidth="200.0" text="    About Game:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextArea>
+</AnchorPane>
