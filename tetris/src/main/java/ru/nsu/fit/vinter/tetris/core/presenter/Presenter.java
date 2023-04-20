@@ -1,6 +1,5 @@
 package ru.nsu.fit.vinter.tetris.core.presenter;
 
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -8,7 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import ru.nsu.fit.vinter.tetris.core.model.Game;
 import ru.nsu.fit.vinter.tetris.core.view.SceneController;
 
 import java.io.IOException;
@@ -16,9 +17,10 @@ import java.io.IOException;
 public class Presenter extends Application {
     public Button exitButton1;
     public Button exitButton2;
+    public GridPane grid;
 
-    SceneController sceneController = new SceneController();;
-    //Game game;
+    private final SceneController sceneController = new SceneController();;
+    private Game game = new Game();
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -30,12 +32,14 @@ public class Presenter extends Application {
     }
 
     @FXML
-    public void newGameButtonClicked() {
-        //delete Game game and create again
+    public void newGameButtonClicked() throws IOException {
+        game.saveScores();
+        game = new Game();
     }
 
     @FXML
-    public void exitGameButtonClicked() {
+    public void exitGameButtonClicked() throws IOException {
+        game.saveScores();
         Platform.exit();
     }
 
