@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import ru.nsu.fit.vinter.tetris.core.model.Game;
-import ru.nsu.fit.vinter.tetris.core.view.SceneController;
 
 import java.io.IOException;
 
@@ -29,6 +28,59 @@ public class Presenter extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    @FXML
+    public void update() {
+        ///
+        game.updateGameField();
+        //
+    }
+
+    @FXML
+    public void moveRight() {
+        if (game.getCurrTetromino().getRightPoint().getX() > 10 || game.getCurrTetromino().getRightPoint().getX() < 0) {
+            //throw exception
+        } else if (game.getCurrTetromino().getRightPoint().getX() == 10) {
+            return;
+        } else {
+            game.getCurrTetromino().moveRightTetromino();
+
+        }
+    }
+
+    @FXML
+    public void moveLeft() {
+        if (game.getCurrTetromino().getRightPoint().getX() < 0 || game.getCurrTetromino().getRightPoint().getX() > 10) {
+            //throw exception
+        } else if (game.getCurrTetromino().getRightPoint().getX() == 0) {
+            return;
+        } else {
+            game.getCurrTetromino().moveLeftTetromino();
+
+        }
+    }
+
+    @FXML
+    public void moveDown() {
+        if (game.getCurrTetromino().getRightPoint().getY() < 0 || game.getCurrTetromino().getRightPoint().getY() > 20) {
+            //throw exception
+        } else if (game.getCurrTetromino().getRightPoint().getY() == 0) {
+            return;
+        } else {
+            game.getCurrTetromino().moveDownTetromino();
+
+        }
+    }
+
+    @FXML
+    public void rotateLeft() {
+
+    }
+
+    @FXML
+    public void rotateRight() {
+
     }
 
     @FXML

@@ -1,9 +1,8 @@
-package ru.nsu.fit.vinter.tetris.core.model;
+package ru.nsu.fit.vinter.tetris.core.model.shapes;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
-import java.util.Set;
+import ru.nsu.fit.vinter.tetris.core.model.Tetromino;
 
 public class ShapeI extends Tetromino {
     private Rectangle a;
@@ -12,19 +11,11 @@ public class ShapeI extends Tetromino {
     private Rectangle d;
     private Color color = Color.LIGHTSKYBLUE;
     private String nameShape = "ShapeI";
-    private Set<Point> shapePoints;
 
     public ShapeI() {
-        shapePoints = Set.of(new Point(0,0), new Point(1,0), new Point(2,0), new Point(3,0));
-    }
-
-    @Override
-    public void rotateLeft() {
-
-    }
-
-    @Override
-    public void rotateRight() {
-
+        this.a.setFill(color);
+        this.b.setFill(color);
+        this.c.setFill(color);
+        this.d.setFill(color);
     }
 }

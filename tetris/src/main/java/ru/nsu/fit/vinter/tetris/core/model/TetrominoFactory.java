@@ -1,5 +1,7 @@
 package ru.nsu.fit.vinter.tetris.core.model;
 
+import ru.nsu.fit.vinter.tetris.core.model.shapes.*;
+
 import java.security.SecureRandom;
 import java.util.List;
 

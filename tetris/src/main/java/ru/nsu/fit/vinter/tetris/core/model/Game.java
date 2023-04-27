@@ -1,21 +1,39 @@
 package ru.nsu.fit.vinter.tetris.core.model;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Game {
-    InputStream scoresFileInputStream;
-    File scoresFile;
-    TetrominoFactory tetrominoFactory = new TetrominoFactory();
-    int currScores;
+    private InputStream scoresFileInputStream;
+    private TetrominoFactory tetrominoFactory = new TetrominoFactory();
+    private int currScores;
+    private Tetromino currTetromino;
+    private boolean[] fieldState = new boolean[10*20];
 
     public Game() {
-        scoresFile = new File("/highScores.txt");
         scoresFileInputStream = Game.class.getResourceAsStream("/highScores.txt");
+        Arrays.fill(fieldState, false);
     }
 
     public void generateNextTetromino() {
-        Tetromino currTetromino = tetrominoFactory.generateNextTetromino();
+        currTetromino = tetrominoFactory.generateNextTetromino();
+    }
+
+    public Tetromino getCurrTetromino() {
+        return this.currTetromino;
+    }
+
+    public void updateGameField() {
+        //
+        currTetromino.moveDownTetromino();
+        //check if it stoped or been moved
+        //check if is there a complete line --> add scores
+
+    }
+
+    private void updateScores(int scores) {
+        this.currScores += scores;
     }
 
     public void saveScores() throws IOException {
