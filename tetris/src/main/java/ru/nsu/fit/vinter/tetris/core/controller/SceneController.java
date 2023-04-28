@@ -1,4 +1,4 @@
-package ru.nsu.fit.vinter.tetris.core.presenter;
+package ru.nsu.fit.vinter.tetris.core.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
