@@ -5,41 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f8078b8-3246-4526-aa9e-e72a9d4ad648" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/controller/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/controller/SceneController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetris.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ru/nsu/fit/vinter/tetris/aboutGame.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ru/nsu/fit/vinter/tetris/gameScene.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ru/nsu/fit/vinter/tetris/highScores.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Game.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Point.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetromino.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/TetrominoCoords.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/TetrominoFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeJ.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeL.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeS.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeT.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeZ.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/Presenter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/SceneController.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetromino.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/TetrominoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/Presenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/controller/SceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/SceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetris.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetris.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/executable/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/executable/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/aboutGame.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/game.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/highScores.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/highScores.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/aboutGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/aboutGame.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/gameScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/gameScene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/highScores.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/highScores.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,15 +61,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "lab3",
-    "last_opened_file_path": "/home/dlaaren/Desktop/OOP-Java-labs/tetris",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;lab3&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/dlaaren/Desktop/OOP-Java-labs/tetris&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

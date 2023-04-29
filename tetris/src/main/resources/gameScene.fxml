@@ -4,11 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane prefHeight="800.0" prefWidth="600.0"
-      xmlns="http://javafx.com/javafx/17.0.2-ea"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="ru.nsu.fit.vinter.tetris.core.controller.Controller">
-    <GridPane fx:id="grid" prefHeight="800.0" prefWidth="400.0">
+<Pane fx:id="pane" onKeyPressed="#moveKeyPressed" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.vinter.tetris.core.presenter.Presenter">
+    <GridPane fx:id="grid" gridLinesVisible="true" prefHeight="800.0" prefWidth="400.0">
         <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -48,7 +45,7 @@
     <Button layoutX="440.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#aboutGameButtonClicked" prefHeight="40.0" prefWidth="120.0" text="About" />
     <Button layoutX="440.0" layoutY="225.0" mnemonicParsing="false" onMouseClicked="#highScoresButtonClicked" prefHeight="40.0" prefWidth="120.0" text="High Scores" />
     <Button layoutX="440.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#exitGameButtonClicked" prefHeight="40.0" prefWidth="120.0" text="Exit" />
-   <Label layoutX="440.0" layoutY="50.0" text="Scores:">
+   <Label fx:id="scores" layoutX="440.0" layoutY="50.0">
       <font>
          <Font size="20.0" />
       </font>
