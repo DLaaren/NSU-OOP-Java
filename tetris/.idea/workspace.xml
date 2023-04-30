@@ -5,14 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f8078b8-3246-4526-aa9e-e72a9d4ad648" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Point.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeJ.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeS.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeT.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeZ.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetris.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetris.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetromino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetromino.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/TetrominoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/TetrominoFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/Presenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/Presenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/executable/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/executable/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/gameScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/gameScene.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +55,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/controller/SceneController.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/17/c5d8a26d28bb271ac5fe667e27814829d73a6124/javafx-graphics-17-sources.jar!/javafx/scene/layout/Pane.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="2P32EiTcI2GQPwBaf0XiAy1XkUr" />
   <component name="ProjectViewState">

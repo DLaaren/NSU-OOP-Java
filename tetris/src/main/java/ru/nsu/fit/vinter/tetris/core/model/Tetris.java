@@ -8,17 +8,16 @@ public class Tetris {
     private int currScores = 0;
     private Tetromino currTetromino;
     private final TetrominoFactory tetrominoFactory = new TetrominoFactory();
-    public static int [][] mesh = new int[20][10];
+    public int [][] mesh = new int[20][10];
 
     public Tetris() {
         for (int[] a: mesh) {
             Arrays.fill(a, 0);
         }
-        currTetromino = generateTetromino();
     }
 
-    public Tetromino generateTetromino() {
-        return tetrominoFactory.generateNextTetromino();
+    public void generateTetromino() {
+        currTetromino = tetrominoFactory.generateNextTetromino();
     }
 
     public void updateScores(int v) {

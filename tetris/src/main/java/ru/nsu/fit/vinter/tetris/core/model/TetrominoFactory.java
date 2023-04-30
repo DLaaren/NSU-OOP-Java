@@ -7,14 +7,13 @@ import java.util.List;
 
 public class TetrominoFactory {
     private final List<Tetromino> shapes = List.of(
-            /*new ShapeI(blockSize), new ShapeJ(blockSize), new ShapeL(blockSize),*/ new ShapeO()
-            //new ShapeS(blockSize), new ShapeT(blockSize), new ShapeZ(blockSize)
+            new ShapeI(), new ShapeJ(), new ShapeL(), new ShapeO(),
+            new ShapeS(), new ShapeT(), new ShapeZ()
     );
 
     public Tetromino generateNextTetromino() {
-        //SecureRandom randomizer = new SecureRandom();
-        //int randomShapeID = randomizer.nextInt(0, 6);
-        //return shapes.get(randomShapeID);
-        return new ShapeO();
+        SecureRandom randomizer = new SecureRandom();
+        int randomShapeID = randomizer.nextInt(0, 6);
+        return shapes.get(randomShapeID);
     }
 }

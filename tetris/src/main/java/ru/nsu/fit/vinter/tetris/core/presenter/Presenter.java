@@ -2,8 +2,10 @@ package ru.nsu.fit.vinter.tetris.core.presenter;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,9 +19,9 @@ import ru.nsu.fit.vinter.tetris.core.model.Tetris;
 import ru.nsu.fit.vinter.tetris.core.model.Tetromino;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
+
+import static javafx.scene.paint.Color.LIGHTSKYBLUE;
 
 public class Presenter extends Application {
     @FXML
@@ -37,7 +39,10 @@ public class Presenter extends Application {
     private Tetris game = new Tetris();
     private boolean isGameRunning = true;
     private boolean isGameStopped = false;
-    private int blockSize = 40;
+    private final int blockSize = 40;
+    private boolean isTimerCalled = false;
+
+    private Timer timer;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -49,17 +54,33 @@ public class Presenter extends Application {
     }
 
     public void callTaskTimer() {
-        Timer timer = new Timer();
+        timer = new Timer();
+
+        pane.getScene().getWindow().setOnCloseRequest(e -> close());
+
+        pane.getScene().setOnKeyPressed(KeyEvent -> {
+            switch (KeyEvent.getCode()) {
+                case D -> game.moveTetrominoRight();
+                case A -> game.moveTetrominoLeft();
+                case S -> game.moveTetrominoDown();
+                case W -> game.rotateTetromino();
+            }
+            drawTetromino();
+        });
+
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater( () -> {
                     if (isGameRunning == true && isGameStopped == false) {
-                        drawTetromino(blockSize);
+                        if (game.getCurrTetromino() == null) {
+                            game.generateTetromino();
+                        }
+                        drawTetromino();
                         game.moveTetrominoDown();
                         ArrayList<Integer> whichRowsRemove = game.removeRow();
                         if (whichRowsRemove.size() > 0) {
-                            //remove rows
+                            //removeRows(whichRowsRemove);
                             game.updateScores(whichRowsRemove.size());
                         }
                         scores.setText("Scores: " + game.getScores());
@@ -77,41 +98,45 @@ public class Presenter extends Application {
                 });
             }
         };
-        timer.schedule(task, 0, 800);
+        timer.schedule(task, 0, 1000);
     }
 
-    public void drawTetromino(int blockSize) {
+    public void close() {
+        timer.cancel();
+    }
+
+    public void drawTetromino() {
         Tetromino currTetromino = game.getCurrTetromino();
         String shapeName = currTetromino.getName();
-        Color color;
-        switch (shapeName) {
-            case "O":
-                color = Color.YELLOW;
-                break;
-            default:
-                color = Color.BLACK;
-                break;
+        Map<String, Color> mapColor = Map.of("I", Color.LIGHTSKYBLUE, "J", Color.BLUE, "L", Color.ORANGE,
+                "S", Color.GREEN,"T", Color.DEEPPINK, "Z", Color.RED, "O", Color.YELLOW);
+        Rectangle a = new Rectangle(blockSize, blockSize, mapColor.get(shapeName));
+        Rectangle b = new Rectangle(blockSize, blockSize, mapColor.get(shapeName));
+        Rectangle c = new Rectangle(blockSize, blockSize, mapColor.get(shapeName));
+        Rectangle d = new Rectangle(blockSize, blockSize, mapColor.get(shapeName));
+        if (grid.getChildren().size() > 1) {
+            grid.getChildren().remove(grid.getChildren().size() - 4, grid.getChildren().size());
         }
-        Rectangle a = new Rectangle(blockSize, blockSize, color);
-        Rectangle b = new Rectangle(blockSize, blockSize, color);
-        Rectangle c = new Rectangle(blockSize, blockSize, color);
-        Rectangle d = new Rectangle(blockSize, blockSize, color);
         grid.add(a, currTetromino.getA().getX(), currTetromino.getA().getY());
         grid.add(b, currTetromino.getB().getX(), currTetromino.getB().getY());
         grid.add(c, currTetromino.getC().getX(), currTetromino.getC().getY());
         grid.add(d, currTetromino.getD().getX(), currTetromino.getD().getY());
     }
 
-    @FXML
-    private void moveKeyPressed() {
-        pane.setOnKeyPressed(KeyEvent -> {
-            switch (KeyEvent.getCode()) {
-                case RIGHT -> game.moveTetrominoRight();
-                case LEFT -> game.moveTetrominoLeft();
-                case DOWN -> game.moveTetrominoDown();
-                case UP -> game.rotateTetromino();
+
+    public void removeRows(ArrayList<Integer> whichRowsRemove) {
+        Set<Node> deletedRectangles = new HashSet<>();
+        Node mesh = grid.getChildren().get(0);
+        /*for (Node rect : grid.getChildren()) {
+            Integer currRowIndex = GridPane.getRowIndex(rect);
+            int row;
+            row = currRowIndex == null ? 0 : currRowIndex;
+            if (row == y) {
+                deletedRectangles.add(rect);
             }
-        });
+        }*/
+        grid.getChildren().removeAll(deletedRectangles);
+        grid.getChildren().add(0,mesh);
     }
 
     public void saveScores(int scores) {
@@ -120,7 +145,10 @@ public class Presenter extends Application {
 
     @FXML
     public void newGameButtonClicked(){
-        callTaskTimer();
+        if (isTimerCalled == false) {
+            callTaskTimer();
+            isTimerCalled = true;
+        }
         saveScores(game.getScores());
         game = new Tetris();
     }

@@ -10,7 +10,8 @@ abstract public class Tetromino {
     private String name;
     private int form;
 
-    protected Tetromino() {
+    public Tetromino() {
+
     }
 
     public String getName() {
