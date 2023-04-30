@@ -18,6 +18,8 @@ abstract public class Tetromino {
         return name;
     }
 
+    public int getForm() { return form; }
+
     public Point getA() {
         return a;
     }
@@ -61,25 +63,31 @@ abstract public class Tetromino {
     public void rotate() {}
 
     public void moveDown() {
-        if (a.getY() < 20 && b.getY() < 20 && c.getY() < 20 && d.getY() < 20) {
-            a.setY(a.getY() + 1);
-            b.setY(b.getY() + 1);
-            c.setY(c.getY() + 1);
-            d.setY(d.getY() + 1);
+        if (a.y() < 19 && b.y() < 19 && c.y() < 19 && d.y() < 19) {
+            a = new Point(a.x(), a.y() + 1);
+            b = new Point(b.x(), b.y() + 1);
+            c = new Point(c.x(), c.y() + 1);
+            d = new Point(d.x(), d.y() + 1);
         }
     }
 
     public void modeRight() {
-        a.setX(a.getX() + 1);
-        b.setX(b.getX() + 1);
-        c.setX(c.getX() + 1);
-        d.setX(d.getX() + 1);
+        if (a.x() < 9 && b.x() < 9 && c.x() < 9 && d.x() < 9) {
+            a = new Point(a.x() + 1, a.y());
+            b = new Point(b.x() + 1, b.y());
+            c = new Point(c.x() + 1, c.y());
+            d = new Point(d.x() + 1, d.y());
+        }
     }
 
     public void moveLeft() {
-        a.setX(a.getX() - 1);
-        b.setX(b.getX() - 1);
-        c.setX(c.getX() - 1);
-        d.setX(d.getX() - 1);
+        if (a.x() > 0 && b.x() > 0 && c.x() > 0 && d.x() > 0) {
+            a = new Point(a.x() - 1, a.y());
+            b = new Point(b.x() - 1, b.y());
+            c = new Point(c.x() - 1, c.y());
+            d = new Point(d.x() - 1, d.y());
+        }
     }
+
+    //public Tetromino copy() {}
 }

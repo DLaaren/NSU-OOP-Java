@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Tetris {
-    private int blockSize = 40;
     private int currScores = 0;
     private Tetromino currTetromino;
-    private final TetrominoFactory tetrominoFactory = new TetrominoFactory();
     public int [][] mesh = new int[20][10];
+    private final TetrominoFactory tetrominoFactory = new TetrominoFactory();
 
     public Tetris() {
         for (int[] a: mesh) {
@@ -33,19 +32,59 @@ public class Tetris {
     }
 
     public void rotateTetromino() {
-
+        if (currTetromino == null) return;
+        currTetromino.rotate();
     }
 
     public void moveTetrominoRight() {
-        currTetromino.modeRight();
+        if (currTetromino == null) return;
+        if (currTetromino.getA().x() == 9 ||
+        currTetromino.getB().x() == 9 ||
+        currTetromino.getC().x() == 9 ||
+        currTetromino.getD().x() == 9 ||
+        mesh [currTetromino.getA().y()] [currTetromino.getA().x() + 1] == 1 ||
+        mesh [currTetromino.getB().y()] [currTetromino.getB().x() + 1] == 1 ||
+        mesh [currTetromino.getC().y()] [currTetromino.getC().x() + 1] == 1 ||
+        mesh [currTetromino.getD().y()] [currTetromino.getD().x() + 1] == 1) {
+        } else {
+            currTetromino.modeRight();
+        }
     }
 
     public void moveTetrominoLeft() {
-        currTetromino.moveLeft();
+        if (currTetromino == null) return;
+        if (currTetromino.getA().x() == 0 ||
+        currTetromino.getB().x() == 0 ||
+        currTetromino.getC().x() == 0 ||
+        currTetromino.getD().x() == 0 ||
+        mesh [currTetromino.getA().y()] [currTetromino.getA().x() - 1] == 1 ||
+        mesh [currTetromino.getB().y()] [currTetromino.getB().x() - 1] == 1 ||
+        mesh [currTetromino.getC().y()] [currTetromino.getC().x() - 1] == 1 ||
+        mesh [currTetromino.getD().y()] [currTetromino.getD().x() - 1] == 1) {
+        } else {
+            currTetromino.moveLeft();
+        }
     }
 
     public void moveTetrominoDown() {
-        currTetromino.moveDown();
+        if (currTetromino == null) return;
+        if (currTetromino.getA().y() == 19 ||
+        currTetromino.getB().y() == 19 ||
+        currTetromino.getC().y() == 19 ||
+        currTetromino.getD().y() == 19 ||
+        mesh [currTetromino.getA().y() + 1] [currTetromino.getA().x()] == 1 ||
+        mesh [currTetromino.getB().y() + 1] [currTetromino.getB().x()] == 1 ||
+        mesh [currTetromino.getC().y() + 1] [currTetromino.getC().x()] == 1 ||
+        mesh [currTetromino.getD().y() + 1] [currTetromino.getD().x()] == 1 ) {
+
+            mesh [currTetromino.getA().y()] [currTetromino.getA().x()] = 1;
+            mesh [currTetromino.getB().y()] [currTetromino.getB().x()] = 1;
+            mesh [currTetromino.getC().y()] [currTetromino.getC().x()] = 1;
+            mesh [currTetromino.getD().y()] [currTetromino.getD().x()] = 1;
+            currTetromino = null;
+        } else {
+            currTetromino.moveDown();
+        }
     }
 
     public ArrayList<Integer> removeRow() {

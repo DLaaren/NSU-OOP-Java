@@ -1,10 +1,10 @@
 package ru.nsu.fit.vinter.tetris.executable;
 
 import javafx.application.Application;
-import ru.nsu.fit.vinter.tetris.core.presenter.Presenter;
+import ru.nsu.fit.vinter.tetris.core.presenter.GameSceneController;
 
 public class Main {
     public static void main(String[] args) {
-        Application.launch(Presenter.class);
+        Application.launch(GameSceneController.class);
     }
 }

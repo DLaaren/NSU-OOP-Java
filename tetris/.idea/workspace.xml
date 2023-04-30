@@ -5,18 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f8078b8-3246-4526-aa9e-e72a9d4ad648" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeJ.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeS.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeT.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeZ.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/AboutGameSceneController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/HighScoresSceneController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetris.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetris.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetromino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/Tetromino.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/TetrominoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/TetrominoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/Presenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/Presenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeJ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeJ.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeZ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/model/shapes/ShapeZ.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/Presenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/GameSceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/core/presenter/SceneController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/executable/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/fit/vinter/tetris/executable/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/aboutGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/aboutGame.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/gameScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/gameScene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/highScores.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/highScores.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

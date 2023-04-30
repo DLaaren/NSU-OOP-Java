@@ -13,4 +13,30 @@ public class ShapeS extends Tetromino {
         setName("S");
         setForm(0);
     }
+
+    @Override
+    public void rotate() {
+        if (getForm() == 0) {
+            setA(new Point(getA().x(), getA().y() - 2));
+            setB(new Point(getB().x() - 1, getB().y() - 1));
+            setC(new Point(getC().x(), getC().y()));
+            setD(new Point(getD().x() - 1, getD().y() + 1));
+            setForm(1);
+        }
+        else if (getForm() == 1) {
+            setA(new Point(getA().x(), getA().y() + 2));
+            setB(new Point(getB().x() + 1, getB().y() + 1));
+            setC(new Point(getC().x(), getC().y()));
+            setD(new Point(getD().x() + 1, getD().y() - 1));
+            setForm(0);
+        }
+    }
 }
+//    |c|d|     form = 0
+//  |a|b|
+
+//  |a|         form = 1
+//  |b|c|
+//    |d|
+
+
