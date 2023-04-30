@@ -7,14 +7,18 @@ public class Tetris {
     private int blockSize = 40;
     private int currScores = 0;
     private Tetromino currTetromino;
-    private final TetrominoFactory tetrominoFactory = new TetrominoFactory(blockSize);
+    private final TetrominoFactory tetrominoFactory = new TetrominoFactory();
     public static int [][] mesh = new int[20][10];
 
     public Tetris() {
         for (int[] a: mesh) {
             Arrays.fill(a, 0);
         }
-        //currTetromino = tetrominoFactory.generateNextTetromino();
+        currTetromino = generateTetromino();
+    }
+
+    public Tetromino generateTetromino() {
+        return tetrominoFactory.generateNextTetromino();
     }
 
     public void updateScores(int v) {
@@ -23,6 +27,10 @@ public class Tetris {
 
     public int getScores() {
         return currScores;
+    }
+
+    public Tetromino getCurrTetromino() {
+        return currTetromino;
     }
 
     public void rotateTetromino() {

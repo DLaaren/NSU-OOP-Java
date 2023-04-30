@@ -10,9 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ru.nsu.fit.vinter.tetris.core.model.Tetris;
+import ru.nsu.fit.vinter.tetris.core.model.Tetromino;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class Presenter extends Application {
     private Tetris game = new Tetris();
     private boolean isGameRunning = true;
     private boolean isGameStopped = false;
+    private int blockSize = 40;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -52,7 +55,8 @@ public class Presenter extends Application {
             public void run() {
                 Platform.runLater( () -> {
                     if (isGameRunning == true && isGameStopped == false) {
-                        //game.moveTetrominoDown();
+                        drawTetromino(blockSize);
+                        game.moveTetrominoDown();
                         ArrayList<Integer> whichRowsRemove = game.removeRow();
                         if (whichRowsRemove.size() > 0) {
                             //remove rows
@@ -73,7 +77,29 @@ public class Presenter extends Application {
                 });
             }
         };
-        timer.schedule(task, 0, 600);
+        timer.schedule(task, 0, 800);
+    }
+
+    public void drawTetromino(int blockSize) {
+        Tetromino currTetromino = game.getCurrTetromino();
+        String shapeName = currTetromino.getName();
+        Color color;
+        switch (shapeName) {
+            case "O":
+                color = Color.YELLOW;
+                break;
+            default:
+                color = Color.BLACK;
+                break;
+        }
+        Rectangle a = new Rectangle(blockSize, blockSize, color);
+        Rectangle b = new Rectangle(blockSize, blockSize, color);
+        Rectangle c = new Rectangle(blockSize, blockSize, color);
+        Rectangle d = new Rectangle(blockSize, blockSize, color);
+        grid.add(a, currTetromino.getA().getX(), currTetromino.getA().getY());
+        grid.add(b, currTetromino.getB().getX(), currTetromino.getB().getY());
+        grid.add(c, currTetromino.getC().getX(), currTetromino.getC().getY());
+        grid.add(d, currTetromino.getD().getX(), currTetromino.getD().getY());
     }
 
     @FXML
