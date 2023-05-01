@@ -1,5 +1,8 @@
 package ru.nsu.fit.vinter.tetris.core.presenter;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -13,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import ru.nsu.fit.vinter.tetris.core.model.Tetris;
 import ru.nsu.fit.vinter.tetris.core.model.Tetromino;
 
@@ -29,10 +33,22 @@ public class GameSceneController extends Application {
     @FXML
     private Label gameOverText;
 
+    private final Map<String, Color> mapColor =
+            Map.of(
+                    "I", Color.LIGHTSKYBLUE,
+                    "J", Color.CORNFLOWERBLUE,
+                    "L", Color.ORANGE,
+                    "S", Color.GREEN,
+                    "T", Color.DEEPPINK,
+                    "Z", Color.RED,
+                    "O", Color.YELLOW
+            );
+
     private Tetris game = new Tetris();
     private final int blockSize = 40;
     private boolean isNotGameOver = true;
-    private Color garbageColor = Color.DARKBLUE;
+    private static final Color GARBAGE_COLOR = Color.DARKBLUE;
+    private static final int FRAME_DELAY_MILLIS = 300;
 
     private Timer timer;
 
@@ -45,6 +61,8 @@ public class GameSceneController extends Application {
         stage.show();
     }
 
+//    private void
+
     public void initGame() {
         grid.getChildren().remove(1, grid.getChildren().size());
         pane.getScene().getWindow().setOnCloseRequest(event -> stopTimerTask());
@@ -56,8 +74,10 @@ public class GameSceneController extends Application {
                 case W -> game.rotateTetromino();
             }
             drawTetromino();
+            drawBackground();
         });
 
+        // TODO timeline???
         timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -65,8 +85,9 @@ public class GameSceneController extends Application {
                 game.removeRows();
                 game.moveTetrominoDown();
                 Platform.runLater(() -> {
-                    drawTetromino();
                     drawBackground();
+                    drawTetromino();
+
                     scores.setText("Scores: " + game.getScores());
                     if (!isNotGameOver) {
                         gameOverText.setText("*Game Over*");
@@ -76,7 +97,7 @@ public class GameSceneController extends Application {
                 });
             }
         };
-        timer.schedule(task, 0, 600);
+        timer.schedule(task, 0, FRAME_DELAY_MILLIS);
     }
 
     public void stopTimerTask() {
@@ -91,17 +112,17 @@ public class GameSceneController extends Application {
             ArrayList<Node> rectanglesRemoved = new ArrayList<>();
             for (Node rect : grid.getChildren()) {
                 if (rect instanceof Rectangle) {
-                    if (((Rectangle) rect).getFill() != garbageColor) {
+                    if (((Rectangle) rect).getFill() != GARBAGE_COLOR) {
                         rectanglesRemoved.add(rect);
                     }
                 }
             }
             grid.getChildren().removeAll(rectanglesRemoved);
         }
+
         Tetromino currTetromino = game.getCurrTetromino();
         String shapeName = currTetromino.getName();
-        Map<String, Color> mapColor = Map.of("I", Color.LIGHTSKYBLUE, "J", Color.CORNFLOWERBLUE, "L", Color.ORANGE,
-                "S", Color.GREEN,"T", Color.DEEPPINK, "Z", Color.RED, "O", Color.YELLOW);
+
         Rectangle a = new Rectangle(blockSize, blockSize, mapColor.get(shapeName));
         Rectangle b = new Rectangle(blockSize, blockSize, mapColor.get(shapeName));
         Rectangle c = new Rectangle(blockSize, blockSize, mapColor.get(shapeName));
@@ -113,41 +134,24 @@ public class GameSceneController extends Application {
     }
 
     public void drawBackground() {
-        ArrayList<Node> rectanglesRemoved = new ArrayList<>();
+        List<Node> rectanglesRemoved = new ArrayList<>();
         for (Node rect : grid.getChildren()) {
             if (rect instanceof Rectangle) {
-                if (((Rectangle) rect).getFill() == garbageColor) {
+                if (((Rectangle) rect).getFill() == GARBAGE_COLOR) {
                     rectanglesRemoved.add(rect);
                 }
             }
         }
+
         grid.getChildren().removeAll(rectanglesRemoved);
         int[][] mesh = game.getMesh();
         for (int i = game.SIZEY - 1; i >= 0; i--) {
             for (int j = 0; j < game.SIZEX; j++) {
                 if (mesh[i][j] == 1) {
-                    Rectangle rect = new Rectangle(blockSize, blockSize, garbageColor);
+                    Rectangle rect = new Rectangle(blockSize, blockSize, GARBAGE_COLOR);
                     grid.add(rect, j, i);
                 }
             }
-        }
-    }
-
-    public void removeRows(ArrayList<Integer> whichRowsRemove) {
-        if (whichRowsRemove.size() > 0) {
-            Set<Node> deletedRectangles = new HashSet<>();
-            for (int y : whichRowsRemove) {
-                for (Node rect : grid.getChildren()) {
-                    if (rect instanceof Rectangle) {
-                        Integer currRowIndex = GridPane.getRowIndex(rect);
-                        int row = currRowIndex == null ? 0 : currRowIndex;
-                        if (row == y) {
-                            deletedRectangles.add(rect);
-                        }
-                    }
-                }
-            }
-            grid.getChildren().removeAll(deletedRectangles);
         }
     }
 
