@@ -12,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ru.nsu.fit.vinter.tetris.core.model.Tetris;
 import ru.nsu.fit.vinter.tetris.core.model.Tetromino;
@@ -33,6 +32,7 @@ public class GameSceneController extends Application {
     private Tetris game = new Tetris();
     private final int blockSize = 40;
     private boolean isNotGameOver = true;
+    private Color garbageColor = Color.DARKBLUE;
 
     private Timer timer;
 
@@ -62,14 +62,11 @@ public class GameSceneController extends Application {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater( () -> {
-                    game.moveTetrominoDown();
+                game.removeRows();
+                game.moveTetrominoDown();
+                Platform.runLater(() -> {
                     drawTetromino();
-                    ArrayList<Integer> whichRowsRemove = game.removeRow();
-                    if (whichRowsRemove.size() > 0) {
-                        //removeRows(whichRowsRemove);
-                        game.updateScores(whichRowsRemove.size());
-                    }
+                    drawBackground();
                     scores.setText("Scores: " + game.getScores());
                     if (!isNotGameOver) {
                         gameOverText.setText("*Game Over*");
@@ -79,7 +76,7 @@ public class GameSceneController extends Application {
                 });
             }
         };
-        timer.schedule(task, 0, 300);
+        timer.schedule(task, 0, 600);
     }
 
     public void stopTimerTask() {
@@ -91,13 +88,19 @@ public class GameSceneController extends Application {
             isNotGameOver = game.generateTetromino();
             if (!isNotGameOver) return;
         } else {
-            if (grid.getChildren().size() > 1) {
-                grid.getChildren().remove(grid.getChildren().size() - 4, grid.getChildren().size());
+            ArrayList<Node> rectanglesRemoved = new ArrayList<>();
+            for (Node rect : grid.getChildren()) {
+                if (rect instanceof Rectangle) {
+                    if (((Rectangle) rect).getFill() != garbageColor) {
+                        rectanglesRemoved.add(rect);
+                    }
+                }
             }
+            grid.getChildren().removeAll(rectanglesRemoved);
         }
         Tetromino currTetromino = game.getCurrTetromino();
         String shapeName = currTetromino.getName();
-        Map<String, Color> mapColor = Map.of("I", Color.LIGHTSKYBLUE, "J", Color.BLUE, "L", Color.ORANGE,
+        Map<String, Color> mapColor = Map.of("I", Color.LIGHTSKYBLUE, "J", Color.CORNFLOWERBLUE, "L", Color.ORANGE,
                 "S", Color.GREEN,"T", Color.DEEPPINK, "Z", Color.RED, "O", Color.YELLOW);
         Rectangle a = new Rectangle(blockSize, blockSize, mapColor.get(shapeName));
         Rectangle b = new Rectangle(blockSize, blockSize, mapColor.get(shapeName));
@@ -109,20 +112,43 @@ public class GameSceneController extends Application {
         grid.add(d, currTetromino.getD().x(), currTetromino.getD().y());
     }
 
+    public void drawBackground() {
+        ArrayList<Node> rectanglesRemoved = new ArrayList<>();
+        for (Node rect : grid.getChildren()) {
+            if (rect instanceof Rectangle) {
+                if (((Rectangle) rect).getFill() == garbageColor) {
+                    rectanglesRemoved.add(rect);
+                }
+            }
+        }
+        grid.getChildren().removeAll(rectanglesRemoved);
+        int[][] mesh = game.getMesh();
+        for (int i = game.SIZEY - 1; i >= 0; i--) {
+            for (int j = 0; j < game.SIZEX; j++) {
+                if (mesh[i][j] == 1) {
+                    Rectangle rect = new Rectangle(blockSize, blockSize, garbageColor);
+                    grid.add(rect, j, i);
+                }
+            }
+        }
+    }
 
     public void removeRows(ArrayList<Integer> whichRowsRemove) {
-        Set<Node> deletedRectangles = new HashSet<>();
-        Node mesh = grid.getChildren().get(0);
-        /*for (Node rect : grid.getChildren()) {
-            Integer currRowIndex = GridPane.getRowIndex(rect);
-            int row;
-            row = currRowIndex == null ? 0 : currRowIndex;
-            if (row == y) {
-                deletedRectangles.add(rect);
+        if (whichRowsRemove.size() > 0) {
+            Set<Node> deletedRectangles = new HashSet<>();
+            for (int y : whichRowsRemove) {
+                for (Node rect : grid.getChildren()) {
+                    if (rect instanceof Rectangle) {
+                        Integer currRowIndex = GridPane.getRowIndex(rect);
+                        int row = currRowIndex == null ? 0 : currRowIndex;
+                        if (row == y) {
+                            deletedRectangles.add(rect);
+                        }
+                    }
+                }
             }
-        }*/
-        grid.getChildren().removeAll(deletedRectangles);
-        grid.getChildren().add(0,mesh);
+            grid.getChildren().removeAll(deletedRectangles);
+        }
     }
 
     public void saveScores(int scores) {

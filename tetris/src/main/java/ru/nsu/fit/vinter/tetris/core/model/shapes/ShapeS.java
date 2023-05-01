@@ -3,6 +3,8 @@ package ru.nsu.fit.vinter.tetris.core.model.shapes;
 import ru.nsu.fit.vinter.tetris.core.model.Point;
 import ru.nsu.fit.vinter.tetris.core.model.Tetromino;
 
+import java.util.ArrayList;
+
 public class ShapeS extends Tetromino {
     public ShapeS() {
         super();
@@ -15,21 +17,27 @@ public class ShapeS extends Tetromino {
     }
 
     @Override
-    public void rotate() {
+    public ArrayList<Point> getRotationShift() {
+        ArrayList<Point> rotationShift = new ArrayList<>();
         if (getForm() == 0) {
-            setA(new Point(getA().x(), getA().y() - 2));
-            setB(new Point(getB().x() - 1, getB().y() - 1));
-            setC(new Point(getC().x(), getC().y()));
-            setD(new Point(getD().x() - 1, getD().y() + 1));
-            setForm(1);
+            rotationShift.add(new Point(0,-2));
+            rotationShift.add(new Point(-1,-1));
+            rotationShift.add(new Point(0,0));
+            rotationShift.add(new Point(-1,1));
         }
-        else if (getForm() == 1) {
-            setA(new Point(getA().x(), getA().y() + 2));
-            setB(new Point(getB().x() + 1, getB().y() + 1));
-            setC(new Point(getC().x(), getC().y()));
-            setD(new Point(getD().x() + 1, getD().y() - 1));
-            setForm(0);
+        if (getForm() == 1) {
+            rotationShift.add(new Point(0,2));
+            rotationShift.add(new Point(1,1));
+            rotationShift.add(new Point(0,0));
+            rotationShift.add(new Point(1,-1));
         }
+        return rotationShift;
+    }
+
+    @Override
+    public void rotate() {
+        super.rotate();
+        setForm((getForm() + 1) % 2);
     }
 }
 //    |c|d|     form = 0

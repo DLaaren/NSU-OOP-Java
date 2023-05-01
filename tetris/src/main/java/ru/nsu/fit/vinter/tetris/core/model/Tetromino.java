@@ -1,6 +1,8 @@
 package ru.nsu.fit.vinter.tetris.core.model;
 
 
+import java.util.ArrayList;
+
 abstract public class Tetromino {
     private Point a;
     private Point b;
@@ -60,7 +62,17 @@ abstract public class Tetromino {
         this.form = form;
     }
 
-    public void rotate() {}
+    public ArrayList<Point> getRotationShift() {
+        return null;
+    };
+
+    public void rotate() {
+        ArrayList<Point> rotationShift = getRotationShift();
+        setA(new Point(getA().x() + rotationShift.get(0).x(), getA().y() + rotationShift.get(0).y()));
+        setB(new Point(getB().x() + rotationShift.get(1).x(), getB().y() + rotationShift.get(1).y()));
+        setC(new Point(getC().x() + rotationShift.get(2).x(), getC().y() + rotationShift.get(2).y()));
+        setD(new Point(getD().x() + rotationShift.get(3).x(), getD().y() + rotationShift.get(3).y()));
+    }
 
     public void moveDown() {
         if (a.y() < 19 && b.y() < 19 && c.y() < 19 && d.y() < 19) {
@@ -88,6 +100,4 @@ abstract public class Tetromino {
             d = new Point(d.x() - 1, d.y());
         }
     }
-
-    //public Tetromino copy() {}
 }
