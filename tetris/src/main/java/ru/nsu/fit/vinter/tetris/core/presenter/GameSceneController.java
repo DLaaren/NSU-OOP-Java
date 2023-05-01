@@ -27,9 +27,12 @@ public class GameSceneController extends Application {
     private Pane pane;
     @FXML
     private Label scores;
+    @FXML
+    private Label gameOverText;
 
     private Tetris game = new Tetris();
     private final int blockSize = 40;
+    private boolean isNotGameOver = true;
 
     private Timer timer;
 
@@ -55,7 +58,6 @@ public class GameSceneController extends Application {
             drawTetromino();
         });
 
-        boolean isGameOver = false;
         timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -69,14 +71,9 @@ public class GameSceneController extends Application {
                         game.updateScores(whichRowsRemove.size());
                     }
                     scores.setText("Scores: " + game.getScores());
-                    if (isGameOver) {
-                        Text gameOverText = new Text("*Game Over*");
-                        gameOverText.setFill(Color.RED);
+                    if (!isNotGameOver) {
+                        gameOverText.setText("*Game Over*");
                         gameOverText.setStyle("-fx-font: 70 arial");
-                        gameOverText.setX(80);
-                        gameOverText.setY(300);
-                        pane.getChildren().add(gameOverText);
-
                         saveScores(game.getScores());
                     }
                 });
@@ -91,7 +88,8 @@ public class GameSceneController extends Application {
 
     public void drawTetromino() {
         if (game.getCurrTetromino() == null) {
-            game.generateTetromino();
+            isNotGameOver = game.generateTetromino();
+            if (!isNotGameOver) return;
         } else {
             if (grid.getChildren().size() > 1) {
                 grid.getChildren().remove(grid.getChildren().size() - 4, grid.getChildren().size());
@@ -135,6 +133,8 @@ public class GameSceneController extends Application {
     public void newGameButtonClicked(){
         saveScores(game.getScores());
         stopTimerTask();
+        gameOverText.setText("");
+        isNotGameOver = true;
         game = new Tetris();
         initGame();
     }

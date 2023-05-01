@@ -15,8 +15,13 @@ public class Tetris {
         }
     }
 
-    public void generateTetromino() {
+    public boolean generateTetromino() {
+        if (mesh[0][3] == 1 ||mesh[0][4] == 1 || mesh[0][5] == 1 || mesh[0][6] == 1) {
+            currTetromino = null;
+            return false;
+        }
         currTetromino = tetrominoFactory.generateNextTetromino();
+        return  true;
     }
 
     public void updateScores(int v) {
