@@ -2,12 +2,13 @@ package ru.nsu.fit.vinter.tetris.core.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Tetris {
     private int currScores = 0;
     private Tetromino currTetromino;
-    public final int SIZEX = 10;
-    public final int SIZEY = 20;
+    public static final int SIZEX = 10;
+    public static final int SIZEY = 20;
 
     public int [][] mesh = new int[SIZEY][SIZEX];
     private final TetrominoFactory tetrominoFactory = new TetrominoFactory();
@@ -51,7 +52,7 @@ public class Tetris {
         return currTetromino;
     }
 
-    public boolean canTetrominoRotates(ArrayList<Point> shiftRotation) {
+    public boolean canTetrominoRotates(List<Point> shiftRotation) {
         if (currTetromino.getA().y() + shiftRotation.get(0).y() > SIZEY - 1 || currTetromino.getA().y() + shiftRotation.get(0).y() < 0 ||
         currTetromino.getA().x() + shiftRotation.get(0).x() > SIZEX - 1 || currTetromino.getA().x() + shiftRotation.get(0).x() < 0 ||
         currTetromino.getB().y() + shiftRotation.get(1).y() > SIZEY - 1 || currTetromino.getB().y() + shiftRotation.get(1).y() < 0 ||
@@ -71,7 +72,7 @@ public class Tetris {
 
     public void rotateTetromino() {
         if (currTetromino == null) return;
-        ArrayList<Point> shiftRotation = currTetromino.getRotationShift();
+        List<Point> shiftRotation = currTetromino.getRotationShift();
         if (canTetrominoRotates(shiftRotation)) {
             currTetromino.rotate();
         }
@@ -127,8 +128,8 @@ public class Tetris {
         }
     }
 
-    public ArrayList<Integer> removeRows() {
-        ArrayList<Integer> whichLinesRemove = new ArrayList<>();
+    public void removeRows() {
+        List<Integer> whichLinesRemove = new ArrayList<>();
         for (int i = SIZEY - 1; i >= 0; i--) {
             int count = 0;
             for (int j = 0; j < SIZEX; j++) {
@@ -140,35 +141,29 @@ public class Tetris {
                 }
             }
         }
+
         for (int i : whichLinesRemove) {
             Arrays.fill(mesh[i], 0);
         }
         if (whichLinesRemove.size() > 0) {
-            int index = 1;
-            int shift = 1;
-            for (int i = whichLinesRemove.get(0); i > 0; i--) {
-                if (index < whichLinesRemove.size() &&  (i - 1) == whichLinesRemove.get(index)) {
-                    shift += 1;
+            int shift = 0;
+            int index = 0;
+            for (int i = whichLinesRemove.get(index); i >= 0; i--) {
+                int m = 0;
+                while (index < whichLinesRemove.size() && i - m == whichLinesRemove.get(index)) {
                     index += 1;
+                    shift += 1;
+                    m += 1;
                 }
-                for (int j = 0; j < SIZEX; j++) {
-                    if (i - shift < 0) {
-                        mesh[i][j] = 0;
-                    } else {
+                for (int j = 0; j < Tetris.SIZEX; j++) {
+                    if (i - shift >= 0) {
                         mesh[i][j] = mesh[i - shift][j];
+                    } else {
+                        mesh[i][j] = 0;
                     }
                 }
             }
         }
-
-//        for (int[] line: mesh) {
-//            for (int j = 0; j < 10; j++)
-//                System.out.print(line[j]);
-//            System.out.println();
-//        }
-//        System.out.println();
-
         updateScores(whichLinesRemove.size());
-        return whichLinesRemove;
     }
 }

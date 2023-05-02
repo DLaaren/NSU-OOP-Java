@@ -1,8 +1,5 @@
 package ru.nsu.fit.vinter.tetris.core.presenter;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -16,7 +13,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import ru.nsu.fit.vinter.tetris.core.model.Tetris;
 import ru.nsu.fit.vinter.tetris.core.model.Tetromino;
 
@@ -48,7 +44,7 @@ public class GameSceneController extends Application {
     private final int blockSize = 40;
     private boolean isNotGameOver = true;
     private static final Color GARBAGE_COLOR = Color.DARKBLUE;
-    private static final int FRAME_DELAY_MILLIS = 300;
+    private static final int FRAME_DELAY_MILLIS = 500;
 
     private Timer timer;
 
@@ -77,7 +73,6 @@ public class GameSceneController extends Application {
             drawBackground();
         });
 
-        // TODO timeline???
         timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -145,8 +140,8 @@ public class GameSceneController extends Application {
 
         grid.getChildren().removeAll(rectanglesRemoved);
         int[][] mesh = game.getMesh();
-        for (int i = game.SIZEY - 1; i >= 0; i--) {
-            for (int j = 0; j < game.SIZEX; j++) {
+        for (int i = Tetris.SIZEY - 1; i >= 0; i--) {
+            for (int j = 0; j < Tetris.SIZEX; j++) {
                 if (mesh[i][j] == 1) {
                     Rectangle rect = new Rectangle(blockSize, blockSize, GARBAGE_COLOR);
                     grid.add(rect, j, i);
@@ -178,7 +173,6 @@ public class GameSceneController extends Application {
 
     @FXML
     public void highScoresButtonClicked() throws IOException {
-        stopTimerTask();
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/highScores.fxml"));
         Scene scene = new Scene(root);
@@ -189,7 +183,6 @@ public class GameSceneController extends Application {
 
     @FXML
     public void aboutGameButtonClicked() throws IOException {
-        stopTimerTask();
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/aboutGame.fxml"));
         Scene scene = new Scene(root);
