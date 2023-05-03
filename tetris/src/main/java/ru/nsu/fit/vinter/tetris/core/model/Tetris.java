@@ -1,5 +1,6 @@
 package ru.nsu.fit.vinter.tetris.core.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,8 +13,9 @@ public class Tetris {
 
     public int [][] mesh = new int[SIZEY][SIZEX];
     private final TetrominoFactory tetrominoFactory = new TetrominoFactory();
+    private final HighScoresWriter highScoresWriter = new HighScoresWriter();
 
-    public Tetris() {
+    public Tetris() throws IOException {
         for (int[] line: mesh) {
             Arrays.fill(line, 0);
         }
@@ -42,6 +44,10 @@ public class Tetris {
         } else if (v == 4) {
             currScores += 1200;
         }
+    }
+
+    public void saveScores(int scores) throws IOException {
+        highScoresWriter.write(scores);
     }
 
     public int getScores() {

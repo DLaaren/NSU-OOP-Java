@@ -19,7 +19,7 @@ import ru.nsu.fit.vinter.tetris.core.model.Tetromino;
 import java.io.IOException;
 import java.util.*;
 
-public class GameSceneController extends Application {
+public class GameScenePresenter extends Application {
     @FXML
     private GridPane grid;
     @FXML
@@ -48,9 +48,12 @@ public class GameSceneController extends Application {
 
     private Timer timer;
 
+    public GameScenePresenter() throws IOException {
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(GameSceneController.class.getResource("/gameScene.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(GameScenePresenter.class.getResource("/gameScene.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Tetris");
         stage.setScene(scene);
@@ -87,7 +90,11 @@ public class GameSceneController extends Application {
                     if (!isNotGameOver) {
                         gameOverText.setText("*Game Over*");
                         gameOverText.setStyle("-fx-font: 70 arial");
-                        saveScores(game.getScores());
+                        try {
+                            game.saveScores(game.getScores());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 });
             }
@@ -150,13 +157,9 @@ public class GameSceneController extends Application {
         }
     }
 
-    public void saveScores(int scores) {
-        //write scores in file
-    }
-
     @FXML
-    public void newGameButtonClicked(){
-        saveScores(game.getScores());
+    public void newGameButtonClicked() throws IOException {
+        game.saveScores(game.getScores());
         stopTimerTask();
         gameOverText.setText("");
         isNotGameOver = true;
@@ -165,8 +168,8 @@ public class GameSceneController extends Application {
     }
 
     @FXML
-    public void exitGameButtonClicked() {
-        saveScores(game.getScores());
+    public void exitGameButtonClicked() throws IOException {
+        game.saveScores(game.getScores());
         stopTimerTask();
         Platform.exit();
     }
@@ -174,7 +177,7 @@ public class GameSceneController extends Application {
     @FXML
     public void highScoresButtonClicked() throws IOException {
         Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/highScores.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/highScores.fxml")));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("HighScores");
@@ -184,7 +187,7 @@ public class GameSceneController extends Application {
     @FXML
     public void aboutGameButtonClicked() throws IOException {
         Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/aboutGame.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/aboutGame.fxml")));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("About");

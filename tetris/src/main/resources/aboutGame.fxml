@@ -9,7 +9,7 @@
 <Pane prefHeight="800.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ru.nsu.fit.vinter.tetris.core.presenter.AboutGameSceneController">
+            fx:controller="ru.nsu.fit.vinter.tetris.core.presenter.AboutGameScenePresenter">
 <Button fx:id="exitButton" layoutX="230.0" layoutY="661.0"
         onMouseClicked="#getBackButtonCLicked"
         prefHeight="40.0" prefWidth="140.0" text="Get Back" />

@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class AboutGameSceneController {
+public class AboutGameScenePresenter {
     @FXML
     private Button exitButton;
     public void getBackButtonCLicked() {

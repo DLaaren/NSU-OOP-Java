@@ -4,14 +4,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.vinter.tetris.core.presenter.HighScoresSceneController">
+<Pane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.vinter.tetris.core.presenter.HighScoresScenePresenter">
     <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="230.0" layoutY="600.0" mnemonicParsing="false" onMouseClicked="#getBackButtonCLicked" prefHeight="40.0" prefWidth="140.0" text="Get Back" />
    <Label layoutX="175.0" layoutY="100.0" text="High Scores Table:">
       <font>
          <Font size="30.0" />
       </font>
    </Label>
-   <Label fx:id="highScoresText" alignment="CENTER" layoutX="200.0" layoutY="200.0">
+   <Label fx:id="highScoresText" alignment="CENTER" layoutX="300.0" layoutY="200.0">
+      <font>
+         <Font size="25.0" />
+      </font>
+   </Label>
+   <Label layoutX="200.0" layoutY="200.0" text="1&#10;2&#10;3&#10;4&#10;5&#10;6&#10;7&#10;8&#10;9&#10;10&#10;" textAlignment="CENTER">
       <font>
          <Font size="25.0" />
       </font>

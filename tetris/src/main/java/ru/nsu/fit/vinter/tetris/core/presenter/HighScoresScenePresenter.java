@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ResourceBundle;
 
-public class HighScoresSceneController implements Initializable {
+public class HighScoresScenePresenter implements Initializable {
     @FXML
     private Button exitButton;
     @FXML
@@ -26,7 +26,7 @@ public class HighScoresSceneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String scores = null;
+        String scores;
         try {
             scores = Files.readString(Path.of("data/highScores.txt"));
         } catch (IOException e) {
