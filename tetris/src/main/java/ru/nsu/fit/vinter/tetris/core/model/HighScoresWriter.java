@@ -6,7 +6,7 @@ import java.util.Objects;
 public class HighScoresWriter {
     BufferedReader reader = new BufferedReader(new FileReader("data/highScores.txt"));
     String[] fileContent = new String[10];
-    FileWriter writer = new FileWriter("data/highScores.txt", false);
+    FileWriter writer;
 
     public HighScoresWriter() throws IOException {
     }
@@ -29,8 +29,11 @@ public class HighScoresWriter {
         for (int i = 0; i < 10; i++) {
             if (!Objects.equals(fileContent[i], "===")) {
                 int currHighScore = Integer.parseInt(fileContent[i]);
-                if(scores > currHighScore) {
+                if (scores > currHighScore) {
                     return i;
+                }
+                if (scores == currHighScore) {
+                    return -1;
                 }
             } else if (Objects.equals(fileContent[i], "===") && Integer.parseInt(fileContent[i-1]) > scores) {
                 return i;
@@ -40,23 +43,25 @@ public class HighScoresWriter {
     }
 
     public void write(int scores) throws IOException {
-        System.out.println("scores " + scores);
         if (scores == 0) {
             return;
         }
         int index = isNewHighScore(scores);
-        System.out.println("index " + index);
         if (index != -1) {
-            writer.write("");
+            writer = new FileWriter("data/highScores.txt", false);
+            StringBuilder contentToWrite = new StringBuilder();
             for (int i = 0; i < 10; i++) {
                 if (i < index) {
-                    writer.append(fileContent[i]).append("\n");
+                    contentToWrite.append(fileContent[i]).append("\n");
                 } else if (i == index) {
-                    writer.append(String.valueOf(scores)).append("\n");
+                    contentToWrite.append(scores).append("\n");
                 } else {
-                    writer.append(fileContent[i - 1]).append("\n");
+                    contentToWrite.append(fileContent[i - 1]).append("\n");
                 }
             }
+            System.out.println(contentToWrite);
+            writer.write(String.valueOf(contentToWrite));
+            writer.flush();
         }
     }
 }
