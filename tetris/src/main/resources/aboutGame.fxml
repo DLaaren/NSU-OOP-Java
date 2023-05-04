@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane prefHeight="800.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/17.0.2-ea"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ru.nsu.fit.vinter.tetris.core.presenter.AboutGameScenePresenter">
-<Button fx:id="exitButton" layoutX="230.0" layoutY="661.0"
-        onMouseClicked="#getBackButtonCLicked"
-        prefHeight="40.0" prefWidth="140.0" text="Get Back" />
+<Pane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.vinter.tetris.core.presenter.AboutGameScenePresenter">
+<Button fx:id="exitButton" layoutX="230.0" layoutY="661.0" onMouseClicked="#getBackButtonCLicked" prefHeight="40.0" prefWidth="140.0" text="Get Back" />
+   <Label layoutX="250.0" layoutY="50.0" text="About:" textAlignment="CENTER">
+      <font>
+         <Font size="40.0" />
+      </font>
+   </Label>
+   <Label layoutX="25.0" layoutY="100.0" text="In Tetris, players complete lines by moving&#10;differently shaped pieces (tetrominoes),&#10;which descend onto the playing field.&#10;The completed lines disappear&#10;and grant the player points,&#10;and the player can proceed&#10;to fill the vacated spaces.&#10;The game ends when the uncleared lines reach&#10;the top of the playing field.&#10;Use ASD to move you Tetromino&#10;and W for rotation&#10;One complete line - 40 point&#10;Two complete lines - 100 points&#10;Three complete lines - 300 points&#10;Four complete lines - 1200 points" textAlignment="CENTER">
+      <font>
+         <Font size="25.0" />
+      </font>
+   </Label>
 </Pane>
