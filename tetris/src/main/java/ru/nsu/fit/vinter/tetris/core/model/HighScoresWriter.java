@@ -28,6 +28,9 @@ public class HighScoresWriter {
         }
         for (int i = 0; i < 10; i++) {
             if (!Objects.equals(fileContent[i], "===")) {
+                if (Objects.equals(fileContent[i], "")) {
+                    return  -1;
+                }
                 int currHighScore = Integer.parseInt(fileContent[i]);
                 if (scores > currHighScore) {
                     return i;
@@ -59,7 +62,6 @@ public class HighScoresWriter {
                     contentToWrite.append(fileContent[i - 1]).append("\n");
                 }
             }
-            System.out.println(contentToWrite);
             writer.write(String.valueOf(contentToWrite));
             writer.flush();
         }
