@@ -3,6 +3,9 @@ package ru.nsu.fit.vinter.carFactory.core.factory;
 import ru.nsu.fit.vinter.carFactory.core.factory.spares.Accessories;
 import ru.nsu.fit.vinter.carFactory.core.factory.spares.CarBody;
 import ru.nsu.fit.vinter.carFactory.core.factory.spares.Motor;
+import ru.nsu.fit.vinter.carFactory.core.factory.tasks.BuildCar;
+import ru.nsu.fit.vinter.carFactory.core.factory.tasks.SellCar;
+import ru.nsu.fit.vinter.carFactory.core.factory.tasks.SupplySpares;
 import ru.nsu.fit.vinter.carFactory.core.threadpool.Task;
 import ru.nsu.fit.vinter.carFactory.core.threadpool.ThreadPool;
 
@@ -15,20 +18,20 @@ public class CarFactory {
 
     private int budget;
 
-    private final Storage<Motor> motorStorage;
-    private final Storage<Accessories> accessoriesStorage;
-    private final Storage<CarBody> carBodyStorage;
-    private final Storage<Car> carStorage;
+    private Storage<Motor> motorStorage;
+    private Storage<Accessories> accessoriesStorage;
+    private Storage<CarBody> carBodyStorage;
+    private Storage<Car> carStorage;
 
-    private final ThreadPool workersThreadPool;
-    private final ThreadPool dealersThreadPool;
-    private final ThreadPool suppliersThreadPool;
+    private ThreadPool workersThreadPool;
+    private ThreadPool dealersThreadPool;
+    private ThreadPool suppliersThreadPool;
 
     Task supplyMotors;
     Task supplyAccessories;
     Task supplyCarBodies;
-    Task build;
-    Task sell;
+    Task buildCar;
+    Task sellCar;
 
     public CarFactory() throws IOException {
         properties = new Properties();
@@ -51,25 +54,58 @@ public class CarFactory {
         suppliersThreadPool = new ThreadPool(suppliersCount * 3);
 
         //workers
-        build = ;
+        buildCar = new BuildCar(this, salary, workerDelay);
 
         //dealers
-        sell = ;
+        sellCar = new SellCar(this, carPrice, dealerDelay);
 
         //suppliers
-        supplyMotors = ;
-        supplyAccessories = ;
-        supplyCarBodies = ;
+        supplyMotors = new SupplySpares<Motor>(this, motorStorage, Motor.class, sparePrice, supplierDelay);
+        supplyAccessories = new SupplySpares<Accessories>(this, accessoriesStorage, Accessories.class, sparePrice, supplierDelay);
+        supplyCarBodies = new SupplySpares<CarBody>(this, carBodyStorage, CarBody.class, sparePrice, supplierDelay);
 
         Thread production = new Thread( () -> {
-            while () {
-
+            while (carStorage.getItemCount() < carStorage.getStorageCapacity()) {
+                suppliersThreadPool.addTask(supplyMotors);
+                suppliersThreadPool.addTask(supplyAccessories);
+                suppliersThreadPool.addTask(supplyCarBodies);
+                workersThreadPool.addTask(buildCar);
+                dealersThreadPool.addTask(sellCar);
             }
         });
 
         production.start();
     }
 
+    public Storage<Motor> getMotorStorage() {
+        return motorStorage;
+    }
 
+    public Storage<Accessories> getAccessoriesStorage() {
+        return accessoriesStorage;
+    }
 
+    public Storage<CarBody> getCarBodyStorage() {
+        return carBodyStorage;
+    }
+
+    public Storage<Car> getCarStorage() {
+        return carStorage;
+    }
+
+    public long generateID() {
+        return generatorID.generate();
+    }
+
+    public void carSold(int price) {
+        budget += price;
+    }
+
+    public void carBuilt(int price) {
+        budget -= price;
+    }
+
+    public void sparesBought(int price) {
+        budget -= price;
+    }
 }

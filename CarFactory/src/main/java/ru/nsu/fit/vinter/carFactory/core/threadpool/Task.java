@@ -2,6 +2,6 @@ package ru.nsu.fit.vinter.carFactory.core.threadpool;
 
 public interface Task {
     String getTaskName();
-    void changeParameters(int newParameter);
-    void performTask();
+    void performTask() throws InterruptedException;
+    void changeParameters(int newParameters);
 }

@@ -1,39 +1,29 @@
 package ru.nsu.fit.vinter.carFactory.core.threadpool;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ThreadPool implements TaskListener {
-    private final Deque<ThreadPoolTask> taskQueue = new ArrayDeque<>();
+public class ThreadPool {
     private final Set<PooledThread> availableThreads = new HashSet<>();
 
-    public ThreadPool(int threadCounts) {
-        //add as many threads as threadCount is
-        //and start them all
-    }
-
-    public void addTask() {
+    public ThreadPool(int count) {
 
     }
 
-    public void shutDown() {
+    public void addTask(Task task) {
 
     }
 
-    @Override
-    public void taskInterrupted(Task task) {
-        //log message
+    public void taskStarted() {
+
     }
 
-    @Override
-    public void taskFinished(Task task) {
-        //log message
+    public void taskFinished() {
+
     }
 
-    @Override
-    public void taskStarted(Task task) {
-        //log message
+    public void taskInterrupted() {
+
     }
+
 }

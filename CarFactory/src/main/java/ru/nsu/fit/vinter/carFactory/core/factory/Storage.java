@@ -7,6 +7,7 @@ public class Storage<T extends Product> {
     private final String storageName;
     private final int storageCapacity;
     private final Deque<T> items;
+    private final Object monitor = new Object();
 
     public Storage(String storageName, int storageCapacity) {
         this.storageName = storageName;
@@ -25,13 +26,28 @@ public class Storage<T extends Product> {
         return items.size();
     }
 
-    public T getItem() {
-        if (!items.isEmpty()) {
-            T item = items.getLast();
-            items.removeLast();
-        } else {
-
+    public T getItem() throws InterruptedException {
+        synchronized (monitor) {
+            while (true) {
+                if (!items.isEmpty()) {
+                    T item = items.getLast();
+                    items.removeLast();
+                    monitor.notify();
+                    return item;
+                } else {
+                    monitor.wait();
+                }
+            }
         }
-        return item;
+    }
+
+    public void put(T newItem) throws InterruptedException {
+        synchronized (monitor) {
+            if (items.size() >= storageCapacity) {
+                monitor.wait();
+            }
+            items.add(newItem);
+            monitor.notify();
+        }
     }
 }
