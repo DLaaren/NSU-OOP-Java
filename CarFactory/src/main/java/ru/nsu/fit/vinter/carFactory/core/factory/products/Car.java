@@ -1,15 +1,15 @@
-package ru.nsu.fit.vinter.carFactory.core.factory;
+package ru.nsu.fit.vinter.carFactory.core.factory.products;
 
-import ru.nsu.fit.vinter.carFactory.core.factory.spares.Accessories;
-import ru.nsu.fit.vinter.carFactory.core.factory.spares.CarBody;
-import ru.nsu.fit.vinter.carFactory.core.factory.spares.Motor;
+import ru.nsu.fit.vinter.carFactory.core.factory.products.spares.Accessories;
+import ru.nsu.fit.vinter.carFactory.core.factory.products.spares.CarBody;
+import ru.nsu.fit.vinter.carFactory.core.factory.products.spares.Motor;
 
 public class Car extends Product {
     private Motor motor;
     private Accessories accessories;
     private CarBody carBody;
 
-    public Car(int id) {
+    public Car(long id) {
         super(id);
     }
 

@@ -1,7 +1,7 @@
 package ru.nsu.fit.vinter.carFactory.core.factory.tasks;
 
 import ru.nsu.fit.vinter.carFactory.core.factory.CarFactory;
-import ru.nsu.fit.vinter.carFactory.core.factory.Product;
+import ru.nsu.fit.vinter.carFactory.core.factory.products.Product;
 import ru.nsu.fit.vinter.carFactory.core.factory.Storage;
 import ru.nsu.fit.vinter.carFactory.core.threadpool.Task;
 
@@ -28,12 +28,8 @@ public class SupplySpares<T extends Product> implements Task {
     @Override
     public void performTask() throws InterruptedException {
         while(!Thread.currentThread().isInterrupted()) {
+            //let's imageine that is how he delivers stuff :^)
             Thread.sleep(delay);
         }
-    }
-
-    @Override
-    public void changeParameters(int newParameters) {
-        this.delay = newParameters;
     }
 }

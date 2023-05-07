@@ -1,12 +1,12 @@
 package ru.nsu.fit.vinter.carFactory.core.factory.tasks;
 
-import ru.nsu.fit.vinter.carFactory.core.factory.Car;
+import ru.nsu.fit.vinter.carFactory.core.factory.products.Car;
 import ru.nsu.fit.vinter.carFactory.core.factory.CarFactory;
 import ru.nsu.fit.vinter.carFactory.core.factory.Storage;
 import ru.nsu.fit.vinter.carFactory.core.threadpool.Task;
 
 public class SellCar implements Task {
-    private int dealerID;
+    private long dealerID;
     private int delay;
     private final int carPrice;
     private final CarFactory carFactory;
@@ -29,14 +29,10 @@ public class SellCar implements Task {
     @Override
     public void performTask() throws InterruptedException {
         while (!Thread.currentThread().isInterrupted()) {
+            //let's imagine that is how he sells car
             Thread.sleep(delay);
-            carStorage.getItem();
+            carStorage.takeItem();
             carFactory.carSold(carPrice);
         }
-    }
-
-    @Override
-    public void changeParameters(int newParameters) {
-        this.delay = newParameters;
     }
 }

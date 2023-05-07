@@ -1,5 +1,7 @@
 package ru.nsu.fit.vinter.carFactory.core.factory;
 
+import ru.nsu.fit.vinter.carFactory.core.factory.products.Product;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -26,7 +28,7 @@ public class Storage<T extends Product> {
         return items.size();
     }
 
-    public T getItem() throws InterruptedException {
+    public T takeItem() throws InterruptedException {
         synchronized (monitor) {
             while (true) {
                 if (!items.isEmpty()) {
