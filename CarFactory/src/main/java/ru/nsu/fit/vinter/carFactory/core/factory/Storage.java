@@ -4,8 +4,11 @@ import ru.nsu.fit.vinter.carFactory.core.factory.products.Product;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.logging.Logger;
 
 public class Storage<T extends Product> {
+    private static final Logger logger = Logger.getLogger(Storage.class.getName());
+
     private final String storageName;
     private final int storageCapacity;
     private final Deque<T> items;
@@ -15,6 +18,7 @@ public class Storage<T extends Product> {
         this.storageName = storageName;
         this.storageCapacity = storageCapacity;
         this.items = new ArrayDeque<>();
+        logger.info(storageName + " HAS BEEN CREATED");
     }
 
     public String getStorageName() {
@@ -31,13 +35,22 @@ public class Storage<T extends Product> {
     public T takeItem() throws InterruptedException {
         synchronized (monitor) {
             while (true) {
-                if (!items.isEmpty()) {
-                    T item = items.getLast();
-                    items.removeLast();
-                    monitor.notify();
-                    return item;
-                } else {
-                    monitor.wait();
+                try {
+                    logger.info(storageName + " WITH AMOUNT OF ITEMS = " + items.size());
+                    if (!items.isEmpty()) {
+                        T item = items.getLast();
+                        items.removeLast();
+                        monitor.notify();
+                        logger.info(storageName + " HAS PASSED PRODUCT");
+                        return item;
+                    } else {
+                        logger.info(storageName + " IS WAITING FOR ITEM");
+                        monitor.wait();
+                        logger.info(storageName + " HAS GOTTEN ITEM");
+                    }
+                } catch (InterruptedException e) {
+                    logger.info(storageName + " INTERRUPTED");
+                    throw e;
                 }
             }
         }

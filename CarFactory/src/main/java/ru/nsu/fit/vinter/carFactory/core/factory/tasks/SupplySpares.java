@@ -5,7 +5,12 @@ import ru.nsu.fit.vinter.carFactory.core.factory.products.Product;
 import ru.nsu.fit.vinter.carFactory.core.factory.Storage;
 import ru.nsu.fit.vinter.carFactory.core.threadpool.Task;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Logger;
+
 public class SupplySpares<T extends Product> implements Task {
+    private Logger logger = Logger.getLogger(SupplySpares.class.toString());
+
     private int delay;
     private final int price;
     private final CarFactory carFactory;
@@ -21,15 +26,21 @@ public class SupplySpares<T extends Product> implements Task {
     }
 
     @Override
-    public String getTaskName() {
-        return "Supllying: spare = " + itemClass.getName();
-    }
-
-    @Override
-    public void performTask() throws InterruptedException {
+    public void performTask() {
         while(!Thread.currentThread().isInterrupted()) {
-            //let's imageine that is how he delivers stuff :^)
-            Thread.sleep(delay);
+            try {
+                Thread.sleep(delay);
+                T item = itemClass.getDeclaredConstructor(long.class).newInstance(carFactory.generateID());
+                storage.put(item);
+                carFactory.sparesBought(price);
+                logger.info(itemClass.getName() + " SUPPLIER HAS DELIVERED SPARE");
+            } catch (InterruptedException e) {
+                logger.info(Thread.currentThread().getName() + " :: INTERRUPTED");
+                break;
+            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
+                     InvocationTargetException e) {
+                Thread.currentThread().interrupt();
+            }
         }
     }
 }

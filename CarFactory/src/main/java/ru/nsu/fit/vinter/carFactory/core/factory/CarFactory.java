@@ -13,54 +13,74 @@ import ru.nsu.fit.vinter.carFactory.core.threadpool.ThreadPool;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class CarFactory {
+    private Logger logger = Logger.getLogger(CarFactory.class.toString());
+
     private Properties properties;
     private final GeneratorID generatorID = new GeneratorID();
 
     private int budget;
     private int carPrice;
     private int workersSalary;
+    private int sparePrice;
 
-    private Storage<Motor> motorStorage;
-    private Storage<Accessories> accessoriesStorage;
-    private Storage<CarBody> carBodyStorage;
-    private Storage<Car> carStorage;
+    private int workersCount;
+    private int suppliersCount;
+    private int dealersCount;
+
+    private int workerDelay;
+    private int dealerDelay;
+    private int supplierDelay;
+
+    private final Storage<Motor> motorStorage;
+    private final Storage<Accessories> accessoriesStorage;
+    private final Storage<CarBody> carBodyStorage;
+    private final Storage<Car> carStorage;
 
     private ThreadPool workersThreadPool;
     private ThreadPool dealersThreadPool;
     private ThreadPool suppliersThreadPool;
 
-    private Task supplyMotors;
-    private Task supplyAccessories;
-    private Task supplyCarBodies;
-    private Task buildCar;
-    private Task sellCar;
+    private final Task supplyMotors;
+    private final Task supplyAccessories;
+    private final Task supplyCarBodies;
+    private final Task buildCar;
+    private final Task sellCar;
 
     public CarFactory() throws IOException {
+        logger.info("CAR FACTORY IS STARTING");
+
         properties = new Properties();
         properties.load(this.getClass().getResourceAsStream("/config.properties"));
 
         budget = Integer.parseInt(properties.getProperty("StartBudget"));
         carPrice = Integer.parseInt(properties.getProperty("CarPrice"));
         workersSalary = Integer.parseInt(properties.getProperty("WorkersSalary"));
+        sparePrice = Integer.parseInt(properties.getProperty("SparePrice"));
 
         motorStorage = new Storage<>("MotorStorage", Integer.parseInt(properties.getProperty("MotorStorageCapacity")));
         accessoriesStorage = new Storage<>( "AccessoriesStorage", Integer.parseInt(properties.getProperty("AccessoryStorageCapacity")));
         carBodyStorage = new Storage<>("CarBodyStorage", Integer.parseInt(properties.getProperty("CarBodyStorageCapacity")));
         carStorage = new Storage<>("CarStorage", Integer.parseInt(properties.getProperty("CarStorageCapacity")));
 
-        int workersCount = Integer.parseInt(properties.getProperty("WorkersCount"));
-        int suppliersCount = Integer.parseInt(properties.getProperty("SuppliersCount"));
-        int dealersCount = Integer.parseInt(properties.getProperty("DealersCount"));
+        workersCount = Integer.parseInt(properties.getProperty("WorkersCount"));
+        suppliersCount = Integer.parseInt(properties.getProperty("SuppliersCount"));
+        dealersCount = Integer.parseInt(properties.getProperty("DealersCount"));
 
-        //thread pools
-        //workersThreadPool = new ThreadPool(workersCount);
-        //dealersThreadPool = new ThreadPool(dealersCount);
-        //suppliersThreadPool = new ThreadPool(suppliersCount * 3);
+        workerDelay = Integer.parseInt(properties.getProperty("WorkersDelay"));;
+        dealerDelay = Integer.parseInt(properties.getProperty("DealersDelay"));;
+        supplierDelay = Integer.parseInt(properties.getProperty("SuppliersDelay"));;
+
+
+        //threadpools
+        suppliersThreadPool = new ThreadPool(suppliersCount * 3);
+        workersThreadPool = new ThreadPool(workersCount);
+        dealersThreadPool = new ThreadPool(dealersCount);
 
         //workers
-        buildCar = new BuildCar(this, workersSalary, Integer.parseInt(properties.getProperty("WorkersCount")));
+        buildCar = new BuildCar(this, workersSalary, workerDelay);
 
         //dealers
         sellCar = new SellCar(this, carPrice, dealerDelay);
@@ -81,6 +101,13 @@ public class CarFactory {
         });
 
         production.start();
+    }
+
+    public void stopCarFactory() {
+        suppliersThreadPool.shutDown();
+        workersThreadPool.shutDown();
+        dealersThreadPool.shutDown();
+        logger.info("CAR_FACTORY HAS BEEN STOPPED. THE BUDGET IS " + budget);
     }
 
     public Storage<Motor> getMotorStorage() {
@@ -107,13 +134,16 @@ public class CarFactory {
 
     public void carSold(int price) {
         budget += price;
+        logger.info("CAR WAS SOLD");
     }
 
     public void carBuilt(int price) {
         budget -= price;
+        logger.info("SALARY WAS PAID");
     }
 
     public void sparesBought(int price) {
         budget -= price;
+        logger.info("SPARE WAS BOUGHT");
     }
 }

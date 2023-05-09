@@ -5,9 +5,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PooledThread extends Thread {
     AtomicBoolean shutDownRequired = new AtomicBoolean(false);
-    private final Deque<Task> taskQueue;
+    private final Deque<PooledTask> taskQueue;
 
-    public PooledThread(String name, Deque<Task> taskQueue) {
+    public PooledThread(String name, Deque<PooledTask> taskQueue) {
         super(name);
         this.taskQueue = taskQueue;
     }
@@ -17,8 +17,31 @@ public class PooledThread extends Thread {
         shutDownRequired.set(true);
     }
 
-    private void performTask() {
-
+    private void performTask(PooledTask task) {
+        try {
+            task.performTask();
+        } catch (InterruptedException e) {
+            shutDownRequired.set(true);
+        }
     }
 
+    public void run() {
+        PooledTask task;
+        while (!shutDownRequired.get()) {
+            synchronized (taskQueue) {
+                if (taskQueue.isEmpty()) {
+                    try {
+                        taskQueue.wait();
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                    continue;
+                } else {
+                    task = taskQueue.getFirst();
+                    taskQueue.removeFirst();
+                }
+            }
+            performTask(task);
+        }
+    }
 }

@@ -5,7 +5,11 @@ import ru.nsu.fit.vinter.carFactory.core.factory.CarFactory;
 import ru.nsu.fit.vinter.carFactory.core.factory.Storage;
 import ru.nsu.fit.vinter.carFactory.core.threadpool.Task;
 
+import java.util.logging.Logger;
+
 public class SellCar implements Task {
+    private Logger logger = Logger.getLogger(SellCar.class.toString());
+
     private long dealerID;
     private int delay;
     private final int carPrice;
@@ -22,17 +26,12 @@ public class SellCar implements Task {
 
 
     @Override
-    public String getTaskName() {
-        return "Selling car: dealerID = " + dealerID;
-    }
-
-    @Override
     public void performTask() throws InterruptedException {
         while (!Thread.currentThread().isInterrupted()) {
-            //let's imagine that is how he sells car
             Thread.sleep(delay);
             carStorage.takeItem();
             carFactory.carSold(carPrice);
+            logger.info("DEALER WITH ID " + dealerID + "HAS SOLD NEW CAR");
         }
     }
 }
