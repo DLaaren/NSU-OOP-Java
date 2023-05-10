@@ -8,15 +8,10 @@ import ru.nsu.fit.vinter.carFactory.core.factory.products.spares.CarBody;
 import ru.nsu.fit.vinter.carFactory.core.factory.products.spares.Motor;
 import ru.nsu.fit.vinter.carFactory.core.threadpool.Task;
 
-import java.util.logging.Logger;
-
 import static java.lang.Thread.sleep;
 
 public class BuildCar implements Task {
-    private Logger logger = Logger.getLogger(BuildCar.class.toString());
-
     private final CarFactory carFactory;
-    private final long workerID;
     private int delay;
     private int salary;
 
@@ -27,7 +22,6 @@ public class BuildCar implements Task {
 
     public BuildCar(CarFactory carFactory, int salary, int delay) {
         this.carFactory = carFactory;
-        workerID = carFactory.generateID();
         motorStorage = carFactory.getMotorStorage();
         accessoriesStorage = carFactory.getAccessoriesStorage();
         carBodyStorage = carFactory.getCarBodyStorage();
@@ -46,7 +40,6 @@ public class BuildCar implements Task {
             sleep(delay);
             carStorage.put(currCar.finishBuildCar());
             carFactory.carBuilt(salary);
-            logger.info("WORKER WITH ID " + workerID + "HAS BUILT NEW CAR");
         }
     }
 }

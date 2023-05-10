@@ -5,12 +5,7 @@ import ru.nsu.fit.vinter.carFactory.core.factory.CarFactory;
 import ru.nsu.fit.vinter.carFactory.core.factory.Storage;
 import ru.nsu.fit.vinter.carFactory.core.threadpool.Task;
 
-import java.util.logging.Logger;
-
 public class SellCar implements Task {
-    private Logger logger = Logger.getLogger(SellCar.class.toString());
-
-    private long dealerID;
     private int delay;
     private final int carPrice;
     private final CarFactory carFactory;
@@ -21,7 +16,6 @@ public class SellCar implements Task {
         this.carPrice = carPrice;
         this.carFactory = carFactory;
         this.carStorage = carFactory.getCarStorage();
-        dealerID = carFactory.generateID();
     }
 
 
@@ -31,7 +25,6 @@ public class SellCar implements Task {
             Thread.sleep(delay);
             carStorage.takeItem();
             carFactory.carSold(carPrice);
-            logger.info("DEALER WITH ID " + dealerID + "HAS SOLD NEW CAR");
         }
     }
 }

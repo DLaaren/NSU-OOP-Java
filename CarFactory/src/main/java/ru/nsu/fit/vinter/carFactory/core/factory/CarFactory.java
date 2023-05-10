@@ -13,11 +13,8 @@ import ru.nsu.fit.vinter.carFactory.core.threadpool.ThreadPool;
 
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 public class CarFactory {
-    private Logger logger = Logger.getLogger(CarFactory.class.toString());
-
     private Properties properties;
     private final GeneratorID generatorID = new GeneratorID();
 
@@ -50,15 +47,13 @@ public class CarFactory {
     private final Task sellCar;
 
     public CarFactory() throws IOException {
-        logger.info("CAR FACTORY IS STARTING");
-
         properties = new Properties();
         properties.load(this.getClass().getResourceAsStream("/config.properties"));
 
         budget = Integer.parseInt(properties.getProperty("StartBudget"));
         carPrice = Integer.parseInt(properties.getProperty("CarPrice"));
         workersSalary = Integer.parseInt(properties.getProperty("WorkersSalary"));
-        sparePrice = Integer.parseInt(properties.getProperty("SparePrice"));
+        sparePrice = Integer.parseInt(properties.getProperty("SparesPrice"));
 
         motorStorage = new Storage<>("MotorStorage", Integer.parseInt(properties.getProperty("MotorStorageCapacity")));
         accessoriesStorage = new Storage<>( "AccessoriesStorage", Integer.parseInt(properties.getProperty("AccessoryStorageCapacity")));
@@ -107,7 +102,6 @@ public class CarFactory {
         suppliersThreadPool.shutDown();
         workersThreadPool.shutDown();
         dealersThreadPool.shutDown();
-        logger.info("CAR_FACTORY HAS BEEN STOPPED. THE BUDGET IS " + budget);
     }
 
     public Storage<Motor> getMotorStorage() {
@@ -134,16 +128,13 @@ public class CarFactory {
 
     public void carSold(int price) {
         budget += price;
-        logger.info("CAR WAS SOLD");
     }
 
     public void carBuilt(int price) {
         budget -= price;
-        logger.info("SALARY WAS PAID");
     }
 
     public void sparesBought(int price) {
         budget -= price;
-        logger.info("SPARE WAS BOUGHT");
     }
 }
