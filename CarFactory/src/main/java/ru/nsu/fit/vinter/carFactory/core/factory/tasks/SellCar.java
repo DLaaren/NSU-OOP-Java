@@ -5,7 +5,11 @@ import ru.nsu.fit.vinter.carFactory.core.factory.CarFactory;
 import ru.nsu.fit.vinter.carFactory.core.factory.Storage;
 import ru.nsu.fit.vinter.carFactory.core.threadpool.Task;
 
+import java.util.logging.Logger;
+
 public class SellCar implements Task {
+    Logger log = Logger.getLogger(CarFactory.class.getName());
+
     private int delay;
     private final int carPrice;
     private final CarFactory carFactory;
@@ -25,6 +29,7 @@ public class SellCar implements Task {
             Thread.sleep(delay);
             carStorage.takeItem();
             carFactory.carSold(carPrice);
+            log.info("CAR HAS BEEN SOLD\n");
         }
     }
 }

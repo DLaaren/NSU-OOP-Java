@@ -6,7 +6,7 @@
 
 <Pane fx:id="pane" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.vinter.carFactory.executable.Main">
    <children>
-      <Button fx:id="applyButton" layoutX="550.0" layoutY="600.0" mnemonicParsing="false" onMouseClicked="#applyButtonClicked" text="Apply" textAlignment="CENTER">
+      <Button fx:id="applyButton" layoutX="564.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#applyButtonClicked" text="Apply" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
@@ -77,5 +77,10 @@
             <TextField prefWidth="100.0" />
          </graphic>
       </Label>
+      <Button fx:id="startButton" layoutX="567.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#startButtonClicked" text="Start" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

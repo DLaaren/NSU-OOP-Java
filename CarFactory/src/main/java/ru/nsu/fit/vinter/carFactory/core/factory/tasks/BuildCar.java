@@ -8,9 +8,13 @@ import ru.nsu.fit.vinter.carFactory.core.factory.products.spares.CarBody;
 import ru.nsu.fit.vinter.carFactory.core.factory.products.spares.Motor;
 import ru.nsu.fit.vinter.carFactory.core.threadpool.Task;
 
+import java.util.logging.Logger;
+
 import static java.lang.Thread.sleep;
 
 public class BuildCar implements Task {
+    Logger log = Logger.getLogger(CarFactory.class.getName());
+
     private final CarFactory carFactory;
     private int delay;
     private int salary;
@@ -32,7 +36,7 @@ public class BuildCar implements Task {
 
     @Override
     public void performTask() throws InterruptedException {
-        while (Thread.currentThread().isInterrupted()) {
+        while (!Thread.currentThread().isInterrupted()) {
             Car currCar = new Car(carFactory.generateID());
             currCar.installCarBody(carBodyStorage.takeItem());
             currCar.installMotor(motorStorage.takeItem());
@@ -40,6 +44,7 @@ public class BuildCar implements Task {
             sleep(delay);
             carStorage.put(currCar.finishBuildCar());
             carFactory.carBuilt(salary);
+            log.info("CAR HAS BEEN BUILT\n");
         }
     }
 }

@@ -6,8 +6,11 @@ import ru.nsu.fit.vinter.carFactory.core.factory.Storage;
 import ru.nsu.fit.vinter.carFactory.core.threadpool.Task;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Logger;
 
 public class SupplySpares<T extends Product> implements Task {
+    Logger log = Logger.getLogger(CarFactory.class.getName());
+
     private int delay;
     private final int price;
     private final CarFactory carFactory;
@@ -30,6 +33,7 @@ public class SupplySpares<T extends Product> implements Task {
                 T item = itemClass.getDeclaredConstructor(long.class).newInstance(carFactory.generateID());
                 storage.put(item);
                 carFactory.sparesBought(price);
+                log.info("SPARE HAS BEEN BOUGHT\n");
             } catch (InterruptedException e) {
                 break;
             } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |

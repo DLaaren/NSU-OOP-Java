@@ -4,8 +4,11 @@ import ru.nsu.fit.vinter.carFactory.core.factory.products.Product;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.logging.Logger;
 
 public class Storage<T extends Product> {
+    Logger log = Logger.getLogger(CarFactory.class.getName());
+
     private final String storageName;
     private final int storageCapacity;
     private final Deque<T> items;
@@ -36,8 +39,10 @@ public class Storage<T extends Product> {
                         T item = items.getLast();
                         items.removeLast();
                         monitor.notify();
+                        log.info("ITEM HAS BEEN TAKEN FROM STORAGE " + storageName + "\n");
                         return item;
                     } else {
+                        //log.info("STORAGE " + storageName + " IS EMPTY NOW");
                         monitor.wait();
                     }
                 } catch (InterruptedException e) {

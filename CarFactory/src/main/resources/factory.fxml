@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<Pane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ru.nsu.fit.vinter.carFactory.executable.FactorySceneController"
-            prefHeight="700.0" prefWidth="700.0">
-
+<Pane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.vinter.carFactory.executable.FactorySceneController">
+   <children>
+      <Label contentDisplay="BOTTOM" layoutX="64.0" layoutY="50.0" text="CarBody Suppliers" />
+      <Label contentDisplay="BOTTOM" layoutX="304.0" layoutY="50.0" text="Motor Suppliers" />
+      <Label contentDisplay="BOTTOM" layoutX="506.0" layoutY="50.0" text="Accessories Suppliers" />
+      <Label contentDisplay="BOTTOM" layoutX="19.0" layoutY="141.0" text="CarBody Storage">
+         <graphic>
+            <ProgressBar fx:id="carBodyStorageItems" prefWidth="200.0" progress="0.0" />
+         </graphic>
+      </Label>
+      <Label contentDisplay="BOTTOM" layoutX="250.0" layoutY="141.0" text="Motor Storage">
+         <graphic>
+            <ProgressBar fx:id="motorStorageItems" prefWidth="200.0" progress="0.0" />
+         </graphic>
+      </Label>
+      <Label contentDisplay="BOTTOM" layoutX="468.0" layoutY="141.0" text="Accessories Storage">
+         <graphic>
+            <ProgressBar fx:id="accessoriesStorageItems" prefWidth="200.0" progress="0.0" />
+         </graphic>
+      </Label>
+      <Line endX="2.0" endY="63.0" layoutX="117.0" layoutY="69.0" startX="2.0" startY="6.0" />
+      <Line endX="113.0" endY="56.0" layoutX="233.0" layoutY="77.0" startX="113.0" startY="1.0" />
+      <Line endX="391.0" endY="-152.0" layoutX="176.0" layoutY="286.0" startX="391.0" startY="-212.0" />
+      <Label layoutX="320.0" layoutY="272.0" text="Workers" />
+      <Line endX="17.0" endY="61.0" layoutX="330.0" layoutY="202.0" startX="17.0" startY="-10.0" />
+      <Line endX="31.0" endY="52.0" layoutX="340.0" layoutY="212.0" startX="228.0" startY="-14.0" />
+      <Line endX="118.0" endY="60.0" layoutX="212.0" layoutY="205.0" startX="-92.0" startY="-11.0" />
+      <Label contentDisplay="BOTTOM" layoutX="246.0" layoutY="343.0" text="Car Storage">
+         <graphic>
+            <ProgressBar fx:id="carStorageItems" prefWidth="200.0" progress="0.0" />
+         </graphic>
+      </Label>
+      <Line endX="-161.0" endY="17.0" layoutX="512.0" layoutY="317.0" startX="-161.0" startY="-18.0" />
+      <Line endX="3.0" endY="171.0" layoutX="350.0" layoutY="222.0" startX="3.0" startY="215.0" />
+      <Label contentDisplay="BOTTOM" layoutX="325.0" layoutY="450.0" text="Dealers" />
+      <Label fx:id="budgetLabel" contentDisplay="BOTTOM" layoutX="130.0" layoutY="530.0" text="Budget = " />
+      <Button fx:id="startButton" layoutX="250.0" layoutY="600.0" mnemonicParsing="false" onMouseClicked="#startButtonClicked" text="Start" />
+      <Button fx:id="stopButton" layoutX="400.0" layoutY="600.0" mnemonicParsing="false" onMouseClicked="#exitButtonClicked" text="Stop" />
+   </children>
 </Pane>

@@ -13,8 +13,11 @@ import ru.nsu.fit.vinter.carFactory.core.threadpool.ThreadPool;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class CarFactory {
+    Logger log = Logger.getLogger(CarFactory.class.getName());
+
     private Properties properties;
     private final GeneratorID generatorID = new GeneratorID();
 
@@ -60,6 +63,8 @@ public class CarFactory {
         carBodyStorage = new Storage<>("CarBodyStorage", Integer.parseInt(properties.getProperty("CarBodyStorageCapacity")));
         carStorage = new Storage<>("CarStorage", Integer.parseInt(properties.getProperty("CarStorageCapacity")));
 
+        log.info("STORAGES HAVE BEEN CREATED\n");
+
         workersCount = Integer.parseInt(properties.getProperty("WorkersCount"));
         suppliersCount = Integer.parseInt(properties.getProperty("SuppliersCount"));
         dealersCount = Integer.parseInt(properties.getProperty("DealersCount"));
@@ -74,6 +79,8 @@ public class CarFactory {
         workersThreadPool = new ThreadPool(workersCount);
         dealersThreadPool = new ThreadPool(dealersCount);
 
+        log.info("THREADPOOLS HAVE BEEN CREATED\n");
+
         //workers
         buildCar = new BuildCar(this, workersSalary, workerDelay);
 
@@ -85,6 +92,9 @@ public class CarFactory {
         supplyAccessories = new SupplySpares<Accessories>(this, accessoriesStorage, Accessories.class, sparePrice, supplierDelay);
         supplyCarBodies = new SupplySpares<CarBody>(this, carBodyStorage, CarBody.class, sparePrice, supplierDelay);
 
+        log.info("TASKS HAVE BEEN CREATED\n");
+
+        log.info("FACTORY HAS STARTED FORKING\n");
         Thread production = new Thread( () -> {
             while (carStorage.getItemCount() < carStorage.getStorageCapacity()) {
                 suppliersThreadPool.addTask(supplyMotors);
@@ -102,6 +112,7 @@ public class CarFactory {
         suppliersThreadPool.shutDown();
         workersThreadPool.shutDown();
         dealersThreadPool.shutDown();
+        log.info("FACTORY HAS BEEN STOPPED");
     }
 
     public Storage<Motor> getMotorStorage() {
@@ -136,5 +147,9 @@ public class CarFactory {
 
     public void sparesBought(int price) {
         budget -= price;
+    }
+
+    public int getBudget() {
+        return budget;
     }
 }

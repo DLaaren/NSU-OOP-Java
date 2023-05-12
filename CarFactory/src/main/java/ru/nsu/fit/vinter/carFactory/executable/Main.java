@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import ru.nsu.fit.vinter.carFactory.core.factory.CarFactory;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -63,7 +62,10 @@ public class Main extends Application {
             }
         }
         System.out.println("Properties applied");
+    }
 
+    @FXML
+    public void startButtonClicked() throws IOException {
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/factory.fxml")));
         Scene scene = new Scene(root);
