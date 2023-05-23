@@ -25,7 +25,7 @@ public class MainHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("Client has disconnected");
+        System.out.println("Client has disconnected ::" + ctx);
         broadcastMessage("SERVER", clientName + " has disconnected");
     }
 
