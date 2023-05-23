@@ -14,12 +14,9 @@ public class Network {
     private static final String LOCALHOST = "localhost";
     private static final int PORT = 8189;
 
-    private Callback onMessageReceivedCallback;
-
     public Network(Callback onMessageReceivedCallback) {
-        this.onMessageReceivedCallback = onMessageReceivedCallback;
 
-        new Thread( () -> {
+        Thread t = new Thread( () -> {
             //handling network events
             EventLoopGroup workerGroup = new NioEventLoopGroup();
             try {
@@ -33,14 +30,7 @@ public class Network {
                                 //default String-Handler for handling string & bytebuffer
                                 ch.pipeline().addLast(new StringDecoder(),
                                         new StringEncoder(),
-                                        new SimpleChannelInboundHandler<String>() {
-                                            @Override
-                                            protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
-                                                if (onMessageReceivedCallback != null) {
-                                                    onMessageReceivedCallback.callback(msg);
-                                                }
-                                            }
-                                        });
+                                        new ClientHandler(onMessageReceivedCallback));
                             }
                         });
                 ChannelFuture future = bootstrap.connect(LOCALHOST, PORT).sync();
@@ -51,10 +41,17 @@ public class Network {
             } finally {
                 workerGroup.shutdownGracefully();
             }
-        }).start();
+        });
+        t.setDaemon(true);
+        t.start();
     }
 
     public void sendMessage(String str) {
         socketChannel.writeAndFlush(str);
+    }
+
+    public void close() {
+        socketChannel.disconnect();
+        socketChannel.close();
     }
 }

@@ -1,5 +1,6 @@
 package ru.nsu.fit.vinter.chat.client.core;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,9 +24,26 @@ public class ClientController implements Initializable {
         });
     }
 
+    public void setName() {
+        network.sendMessage("/setname " + messageField.getText());
+        messageField.clear();
+        messageField.requestFocus();
+    }
+
+    public void changeName() {
+        network.sendMessage("/changename " + messageField.getText());
+        messageField.clear();
+        messageField.requestFocus();
+    }
+
     public void sendMessageAction(ActionEvent event) {
         network.sendMessage(messageField.getText());
         messageField.clear();
         messageField.requestFocus();
+    }
+
+    public void exitAction() {
+        network.close();
+        Platform.exit();
     }
 }
