@@ -9,27 +9,29 @@ import java.util.List;
 import java.util.Objects;
 
 // Handler for incoming data
-public class MainHandler extends SimpleChannelInboundHandler<String> {
-    private static final List<Channel> clients = new ArrayList<>();
+public class ServerMainHandler extends SimpleChannelInboundHandler<String> {
+    private static final List<Channel> clientsList = new ArrayList<>();
     private String clientName;
     private static int newClientIndex = 1;
     private boolean isNamed = false;
 
+    //when client has connected
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("Client has connected :: " + ctx);
-        clients.add(ctx.channel());
+        clientsList.add(ctx.channel());
         clientName = "Client #" + newClientIndex;
         newClientIndex++;
     }
 
+    //when client has disconnected
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("Client has disconnected ::" + ctx);
         broadcastMessage("SERVER", clientName + " has disconnected");
     }
 
-    //when client has sent message
+    //when server has got message
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         if (Objects.equals(clientName, "")) {
@@ -59,7 +61,7 @@ public class MainHandler extends SimpleChannelInboundHandler<String> {
     public void broadcastMessage(String clientName, String msg) {
         //[ClientName]: <his message> \n
         String out = String.format("[%s]: %s\n", clientName, msg);
-        for (Channel ch : clients) {
+        for (Channel ch : clientsList) {
             ch.writeAndFlush(out);
         }
     }
@@ -67,8 +69,8 @@ public class MainHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         System.out.println("Client " + clientName + "got disconnected");
-        clients.remove(ctx.channel());
-        broadcastMessage("SERVER", "New client has disconnected " + clientName);
+        clientsList.remove(ctx.channel());
+        broadcastMessage("SERVER", "Client has disconnected " + clientName);
         cause.printStackTrace();
         ctx.close();
     }

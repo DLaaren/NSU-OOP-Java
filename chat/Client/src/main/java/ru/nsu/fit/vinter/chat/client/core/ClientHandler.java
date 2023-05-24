@@ -4,7 +4,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 public class ClientHandler extends SimpleChannelInboundHandler<String> {
-    private Callback onMessageReceivedCallback;
+    private final Callback onMessageReceivedCallback;
 
     public ClientHandler(Callback onMessageReceivedCallback) {
         this.onMessageReceivedCallback = onMessageReceivedCallback;
