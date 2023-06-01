@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="500.0"
+      prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ru.nsu.fit.vinter.chat.client.core.ClientChatController">
+    <MenuBar>
+        <Menu text="Chat">
+            <MenuItem text="SetName" onAction="#setName"/>
+            <MenuItem text="ChangeName" onAction="#changeName"/>
+            <MenuItem text="Exit" onAction="#exitAction" />
+        </Menu>
+    </MenuBar>
+    <TextArea fx:id="chatArea" editable="false" VBox.vgrow="ALWAYS" />
+    <HBox>
+        <TextField fx:id="messageField" promptText="Enter your message" HBox.hgrow="ALWAYS" onAction="#sendMessageAction"/>
+        <Button fx:id="sendMessage" text="Send" onAction="#sendMessageAction"/>
+    </HBox>
+</VBox>
