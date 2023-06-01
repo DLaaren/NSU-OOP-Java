@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="pane" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.vinter.carFactory.executable.Main">
+   <children>
+      <Button fx:id="applyButton" layoutX="564.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#applyButtonClicked" text="Apply" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="AccessoryStorageCapacity" contentDisplay="BOTTOM" layoutX="40.0" layoutY="150.0" text="AccessoryStorageCapacity">
+         <graphic>
+            <TextField maxWidth="100.0" />
+         </graphic></Label>
+      <Label fx:id="MotorStorageCapacity" contentDisplay="BOTTOM" layoutX="50.0" layoutY="50.0" text="MotorStorageCapacity" textAlignment="CENTER">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic></Label>
+      <Label fx:id="CarBodyStorageCapacity" contentDisplay="BOTTOM" layoutX="45.0" layoutY="250.0" text="CarBodyStorageCapacity">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic></Label>
+      <Label fx:id="CarStorageCapacity" contentDisplay="BOTTOM" layoutX="60.0" layoutY="350.0" text="CarStorageCapacity">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic></Label>
+      <Label fx:id="SuppliersCount" contentDisplay="BOTTOM" layoutX="300.0" layoutY="50.0" text="SuppliersCount">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic>
+      </Label>
+      <Label fx:id="WorkersCount" contentDisplay="BOTTOM" layoutX="300.0" layoutY="150.0" text="WorkersCount" textAlignment="CENTER">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic>
+      </Label>
+      <Label fx:id="DealersCount" contentDisplay="BOTTOM" layoutX="300.0" layoutY="250.0" text="DealersCount" textAlignment="CENTER">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic>
+      </Label>
+      <Label fx:id="SuplliersDelay" contentDisplay="BOTTOM" layoutX="300.0" layoutY="350.0" text="SuplliersDelay" textAlignment="CENTER">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic>
+      </Label>
+      <Label fx:id="WorkersDelay" contentDisplay="BOTTOM" layoutX="300.0" layoutY="450.0" text="WorkersDelay" textAlignment="CENTER">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic>
+      </Label>
+      <Label fx:id="DealersDelay" contentDisplay="BOTTOM" layoutX="300.0" layoutY="550.0" text="DealersDelay" textAlignment="CENTER">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic>
+      </Label>
+      <Label fx:id="StartBudget" contentDisplay="BOTTOM" layoutX="500.0" layoutY="50.0" text="StartBudget" textAlignment="CENTER">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic>
+      </Label>
+      <Label fx:id="CarPrice" contentDisplay="BOTTOM" layoutX="500.0" layoutY="150.0" text="CarPrice" textAlignment="CENTER">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic>
+      </Label>
+      <Label fx:id="WorkersSalary" contentDisplay="BOTTOM" layoutX="500.0" layoutY="250.0" text="WorkersSalary" textAlignment="CENTER">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic>
+      </Label>
+      <Label fx:id="SparesPrice" contentDisplay="BOTTOM" layoutX="500.0" layoutY="350.0" text="SparePrice" textAlignment="CENTER">
+         <graphic>
+            <TextField prefWidth="100.0" />
+         </graphic>
+      </Label>
+      <Button fx:id="startButton" layoutX="567.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#startButtonClicked" text="Start" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
