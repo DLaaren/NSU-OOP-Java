@@ -1,2 +1,5 @@
-# OOP-Java-labs
-2nd course
+# NSU-OOP-Java
+
+2 курс
+
+Семенарист = Белобородов aka Паша Вейп
